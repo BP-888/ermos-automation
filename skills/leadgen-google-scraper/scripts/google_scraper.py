@@ -70,6 +70,18 @@ DEFAULT_MAX_PLACES_PER_SEARCH = 20
 DEFAULT_RUN_CAP_USD = 5.0
 PILOT_MAX_PLACES = 20
 
+# Full state names, used when a location entry is "ALL,<STATE>" (a state-wide run).
+STATE_NAMES = {
+    "NSW": "New South Wales",
+    "VIC": "Victoria",
+    "QLD": "Queensland",
+    "WA": "Western Australia",
+    "SA": "South Australia",
+    "TAS": "Tasmania",
+    "ACT": "Australian Capital Territory",
+    "NT": "Northern Territory",
+}
+
 POLL_INTERVAL_SECONDS = 10
 POLL_TIMEOUT_SECONDS = 3600
 TERMINAL_STATUSES = {"SUCCEEDED", "FAILED", "ABORTED", "TIMED-OUT", "TIMING-OUT"}
@@ -164,6 +176,45 @@ def load_segment_terms(segment):
     return [t for t in data.get("search_terms", []) if t]
 
 
+def load_suburbs_file(path):
+    """Read 'Suburb,STATE' entries, one per line. Blank lines and # comments ignored."""
+    if not os.path.exists(path):
+        fail("suburbs file not found: {}".format(path))
+    entries = []
+    with open(path, "r", encoding="utf-8") as handle:
+        for line in handle:
+            line = line.split("#", 1)[0].strip()
+            if line:
+                entries.append(line)
+    if not entries:
+        fail("suburbs file is empty: {}".format(path))
+    return entries
+
+
+def state_abbrev(value):
+    """Return the standard abbreviation for an Australian state name (NSW, VIC, ...)."""
+    if not value:
+        return ""
+    upper = value.strip().upper()
+    if upper in STATE_NAMES:
+        return upper
+    for abbrev, name in STATE_NAMES.items():
+        if upper == name.upper():
+            return abbrev
+    return value.strip()
+
+
+def location_query(suburb, state):
+    """Free-text location for the actor. 'ALL' means the whole state."""
+    if suburb.upper() == "ALL":
+        name = STATE_NAMES.get(state)
+        if not name:
+            fail("unknown state '{}' for a state-wide run (use one of {})".format(
+                state, ", ".join(sorted(STATE_NAMES))))
+        return "{}, Australia".format(name)
+    return "{} {} Australia".format(suburb, state)
+
+
 def parse_suburb(raw):
     """Parse 'Suburb,STATE' into (suburb, state)."""
     if "," not in raw:
@@ -188,7 +239,7 @@ def build_actor_input(search_terms, suburb, state, max_places):
     """
     return {
         "searchStringsArray": list(search_terms),
-        "locationQuery": "{} {} Australia".format(suburb, state),
+        "locationQuery": location_query(suburb, state),
         "countryCode": "au",
         "language": "en",
         "skipClosedPlaces": True,
@@ -269,7 +320,7 @@ def normalise_item(item, segment, suburb, state, fallback_term, scraped_at, run_
         "domain": derive_domain(website),
         "phone": as_text(pick(item, "phone", "phoneUnformatted", "internationalPhoneNumber")),
         "address": as_text(pick(item, "address", "street", "formattedAddress")),
-        "state": as_text(pick(item, "state", "administrativeArea")) or state,
+        "state": state_abbrev(as_text(pick(item, "state", "administrativeArea"))) or state,
         "postcode": as_text(pick(item, "postalCode", "postcode", "zip")),
         "google_category": as_text(pick(item, "categoryName", "category", "categories")),
         "rating": as_text(pick(item, "totalScore", "rating", "score")),
@@ -283,10 +334,14 @@ def normalise_item(item, segment, suburb, state, fallback_term, scraped_at, run_
 
 
 def is_excluded(row, exclusions):
-    """True if the firm name or category matches an exclusion term."""
+    """Return the matching exclusion term, or None.
+
+    Terms match as whole words or phrases (so 'ITP' does not match 'Pitpark'),
+    case-insensitively, against the firm name and the Google category.
+    """
     haystack = "{} {}".format(row["firm_name"], row["google_category"]).lower()
     for term in exclusions:
-        if term in haystack:
+        if re.search(r"(?<![a-z0-9])" + re.escape(term) + r"(?![a-z0-9])", haystack):
             return term
     return None
 
@@ -335,6 +390,109 @@ def write_manifest(path, payload):
 # Main
 # --------------------------------------------------------------------------
 
+def filter_rows(items, segment, suburb, state, fallback_term, scraped_at, run_id,
+                exclusions, seen, dropped, excluded_by_term):
+    """Normalise, exclude and dedupe items. Appends nothing; returns kept rows."""
+    kept = []
+    for item in items:
+        row = normalise_item(item, segment, suburb, state, fallback_term, scraped_at, run_id)
+        if not row["firm_name"]:
+            dropped["no_name"] += 1
+            continue
+        term = is_excluded(row, exclusions)
+        if term:
+            dropped["excluded"] += 1
+            excluded_by_term[term] = excluded_by_term.get(term, 0) + 1
+            continue
+        key = row["domain"] or ("place:" + row["place_id"] if row["place_id"] else "")
+        if not key:
+            dropped["no_identifier"] += 1
+            continue
+        if key in seen:
+            dropped["duplicate"] += 1
+            continue
+        seen[key] = True
+        kept.append(row)
+    return kept
+
+
+def normalise_offline(args, search_terms, suburbs, max_places, exclusions):
+    """Write the standard CSV and manifest from items fetched outside this script."""
+    if len(suburbs) != 1 or len(search_terms) != 1:
+        fail("--from-items-file needs exactly one --suburb and one --search-term "
+             "(the values the run was made with)")
+    raw_dir = os.environ.get("PIPELINE_RAW_DIR", "").strip()
+    if not raw_dir:
+        fail("PIPELINE_RAW_DIR is not set in the environment. Export it and try again.")
+    if not os.path.isdir(raw_dir):
+        fail("PIPELINE_RAW_DIR is not a directory: {}".format(raw_dir))
+    if not os.path.exists(args.from_items_file):
+        fail("items file not found: {}".format(args.from_items_file))
+    with open(args.from_items_file, "r", encoding="utf-8") as handle:
+        items = json.load(handle)
+    if isinstance(items, dict):
+        items = items.get("items", [])
+    if not isinstance(items, list):
+        fail("items file must hold a JSON array of dataset items")
+
+    suburb, state = suburbs[0]
+    scraped_at, tz_label = now_sydney()
+    csv_path, manifest_path = resolve_output_paths(raw_dir, args.segment, suburbs)
+    run_id = args.apify_run_id or "offline"
+    dropped = {"excluded": 0, "duplicate": 0, "no_name": 0, "no_identifier": 0}
+    excluded_by_term = {}
+    rows = filter_rows(items, args.segment, suburb, state, search_terms[0], scraped_at,
+                       run_id, exclusions, {}, dropped, excluded_by_term)
+    write_csv(csv_path, rows)
+    write_manifest(manifest_path, {
+        "segment": args.segment,
+        "mode": args.mode,
+        "sop_version": args.sop_version,
+        "search_terms": search_terms,
+        "suburbs": ["{} {}".format(suburb, state)],
+        "max_places_per_search": max_places,
+        "run_cap_usd": args.run_cap_usd,
+        "scraped_at": scraped_at,
+        "timezone": tz_label,
+        "source": SOURCE,
+        "runs": [{
+            "run_id": run_id,
+            "suburb": suburb,
+            "state": state,
+            "status": "SUCCEEDED (fetched outside this script)",
+            "actor_input": build_actor_input(search_terms, suburb, state, max_places),
+            "cost_usd_reported": args.apify_cost_usd,
+            "items_fetched": len(items),
+        }],
+        "rows_fetched": len(items),
+        "rows_written": len(rows),
+        "rows_dropped": dropped,
+        "rows_dropped_by_exclusion_term": excluded_by_term,
+        "total_cost_usd_reported": args.apify_cost_usd,
+        "output_csv": csv_path,
+        "items_file": os.path.abspath(args.from_items_file),
+    })
+    report(len(items), rows, dropped, excluded_by_term, args.apify_cost_usd, csv_path, manifest_path)
+    return 0
+
+
+def report(fetched, rows, dropped, excluded_by_term, spent, csv_path, manifest_path):
+    with_domain = sum(1 for r in rows if r["domain"])
+    print("\nRows fetched:  {}".format(fetched))
+    print("Rows written:  {} ({} with a domain{})".format(
+        len(rows), with_domain,
+        ", {:.0%}".format(with_domain / len(rows)) if rows else ""))
+    print("Rows dropped:  {} (excluded {}, duplicates {}, no name {}, no identifier {})".format(
+        sum(dropped.values()), dropped["excluded"], dropped["duplicate"],
+        dropped["no_name"], dropped["no_identifier"]))
+    if excluded_by_term:
+        for term, count in sorted(excluded_by_term.items(), key=lambda kv: -kv[1]):
+            print("  excluded by '{}': {}".format(term, count))
+    print("Cost reported by Apify: ${}".format(spent))
+    print("Output:   {}".format(csv_path))
+    print("Manifest: {}".format(manifest_path))
+
+
 def parse_args(argv):
     parser = argparse.ArgumentParser(
         description="Scrape Google Maps businesses via Apify into a single CSV."
@@ -346,8 +504,28 @@ def parse_args(argv):
         help="Repeatable. Falls back to config/segments/<segment>.json if omitted.",
     )
     parser.add_argument(
-        "--suburb", action="append", dest="suburbs", default=[], required=True,
-        help="Repeatable. Format: 'Suburb,STATE' (for example 'Parramatta,NSW').",
+        "--suburb", action="append", dest="suburbs", default=[],
+        help="Repeatable. Format: 'Suburb,STATE' (for example 'Parramatta,NSW'). "
+             "Use 'ALL,NSW' for a state-wide run.",
+    )
+    parser.add_argument(
+        "--suburbs-file", default="",
+        help="File of 'Suburb,STATE' entries, one per line (# comments allowed). "
+             "Combined with any --suburb values.",
+    )
+    parser.add_argument(
+        "--from-items-file", default="",
+        help="Normalise actor results already fetched elsewhere (a JSON array of "
+             "dataset items, e.g. from the Apify connector) instead of calling "
+             "Apify. Needs exactly one --suburb and --search-term. Spends nothing.",
+    )
+    parser.add_argument(
+        "--apify-run-id", default="",
+        help="With --from-items-file: the Apify run id the items came from, for the manifest.",
+    )
+    parser.add_argument(
+        "--apify-cost-usd", type=float, default=0.0,
+        help="With --from-items-file: the cost Apify reported for that run, for the manifest.",
     )
     parser.add_argument("--max-places-per-search", type=int, default=DEFAULT_MAX_PLACES_PER_SEARCH)
     parser.add_argument("--run-cap-usd", type=float, default=DEFAULT_RUN_CAP_USD)
@@ -369,7 +547,12 @@ def main(argv=None):
     if args.run_cap_usd <= 0:
         fail("--run-cap-usd must be greater than 0")
 
-    suburbs = [parse_suburb(s) for s in args.suburbs]
+    raw_suburbs = list(args.suburbs)
+    if args.suburbs_file:
+        raw_suburbs.extend(load_suburbs_file(args.suburbs_file))
+    if not raw_suburbs:
+        fail("give at least one --suburb or a --suburbs-file")
+    suburbs = [parse_suburb(s) for s in raw_suburbs]
     search_terms = args.search_terms or load_segment_terms(args.segment)
     if not search_terms:
         fail(
@@ -393,6 +576,9 @@ def main(argv=None):
         print("Spend cap that would be sent on the query string: "
               "maxTotalChargeUsd={}".format(args.run_cap_usd))
         return 0
+
+    if args.from_items_file:
+        return normalise_offline(args, search_terms, suburbs, max_places, exclusions)
 
     # --- environment -----------------------------------------------------
     token = os.environ.get("APIFY_TOKEN", "").strip()
@@ -457,28 +643,10 @@ def main(argv=None):
         })
         print("  {} finished as {}: {} items, ${} reported.".format(run_id, status, len(items), cost))
 
-        for item in items:
-            row = normalise_item(
-                item, args.segment, suburb, state, search_terms[0], scraped_at, run_id
-            )
-            if not row["firm_name"]:
-                dropped["no_name"] += 1
-                continue
-            term = is_excluded(row, exclusions)
-            if term:
-                dropped["excluded"] += 1
-                excluded_by_term[term] = excluded_by_term.get(term, 0) + 1
-                continue
-            key = row["domain"] or ("place:" + row["place_id"] if row["place_id"] else "")
-            if not key:
-                # No domain and no place_id: nothing to dedupe on.
-                dropped["no_identifier"] += 1
-                continue
-            if key in seen:
-                dropped["duplicate"] += 1
-                continue
-            seen[key] = True
-            rows.append(row)
+        rows.extend(filter_rows(
+            items, args.segment, suburb, state, search_terms[0], scraped_at, run_id,
+            exclusions, seen, dropped, excluded_by_term,
+        ))
 
     # --- write -----------------------------------------------------------
     write_csv(csv_path, rows)
@@ -503,17 +671,7 @@ def main(argv=None):
     })
 
     # --- report ----------------------------------------------------------
-    print("\nRows fetched:  {}".format(fetched))
-    print("Rows written:  {}".format(len(rows)))
-    print("Rows dropped:  {} (excluded {}, duplicates {}, no name {}, no identifier {})".format(
-        sum(dropped.values()), dropped["excluded"], dropped["duplicate"],
-        dropped["no_name"], dropped["no_identifier"]))
-    if excluded_by_term:
-        for term, count in sorted(excluded_by_term.items(), key=lambda kv: -kv[1]):
-            print("  excluded by '{}': {}".format(term, count))
-    print("Cost reported by Apify: ${}".format(spent))
-    print("Output:   {}".format(csv_path))
-    print("Manifest: {}".format(manifest_path))
+    report(fetched, rows, dropped, excluded_by_term, spent, csv_path, manifest_path)
     return 0
 
 

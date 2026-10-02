@@ -39,7 +39,7 @@ they disagree with the SOP, the SOP wins and the fallback should be corrected.
 |---|---|---|
 | `segment` | one of `accounting`, `law`, `healthcare`, `finance`, `aged-care` | Required. |
 | `search_terms` | list of strings | From the SOP. Falls back to `config/segments/<segment>.json`. |
-| `suburbs` | list, each with a state | Required. Each entry is a suburb plus its state, e.g. `Parramatta, NSW`. |
+| `suburbs` | list, each with a state | Required. Each entry is a suburb plus its state, e.g. `Parramatta, NSW`. Give them as repeated `--suburb` flags, or as a file with `--suburbs-file` (one `Suburb,STATE` per line; see `config/locations/`). `ALL,<STATE>` runs a whole state. |
 | `max_places_per_search` | integer | Per the SOP. |
 | `run_cap_usd` | number | Per the SOP. Hard ceiling on what the run may spend. |
 | `mode` | `pilot` or `batch` | Required. See below. |
@@ -63,6 +63,30 @@ they disagree with the SOP, the SOP wins and the fallback should be corrected.
    Add `--search-term` (repeatable), `--max-places-per-search` and
    `--run-cap-usd` to pass the SOP's values. `--dry-run` prints the actor input
    and exits without calling Apify or spending anything.
+
+   For a batch over many locations, use a locations file:
+   ```bash
+   python3 scripts/google_scraper.py --segment accounting --mode batch \
+     --suburbs-file config/locations/accounting_wave1.txt \
+     --max-places-per-search <per SOP> --run-cap-usd <per SOP> \
+     --sop-version "<version from the SOP>"
+   ```
+   The run cap covers the **whole** script run across all locations. When it's
+   reached, the remaining locations are skipped and reported.
+
+   **Where `api.apify.com` isn't reachable** (e.g. a sandboxed cloud session),
+   run the actor through the Apify connector with the same settings (all paid
+   add-ons off, `countryCode: au`, `skipClosedPlaces: true`), save the dataset
+   items to a JSON file, then normalise them with the script. This spends
+   nothing further:
+   ```bash
+   python3 scripts/google_scraper.py --segment accounting --mode pilot \
+     --suburb "Parramatta,NSW" --search-term "accountant" \
+     --from-items-file items.json --apify-run-id <run id> \
+     --apify-cost-usd <cost reported> --sop-version "<version>"
+   ```
+   This is for pilots and small runs only. Large batches belong where
+   `api.apify.com` is reachable, so the items never pass through a chat context.
 4. **Report back**, in this order:
    - rows written,
    - rows dropped **and why** (excluded, duplicate, unusable),
@@ -82,6 +106,8 @@ These are structural and hold regardless of what the SOP says:
 - **Never write outside `PIPELINE_RAW_DIR`.**
 - **One output file per run**, plus its `.run.json` manifest. Never overwrite an
   existing file.
+- Exclusion terms match whole words or phrases, case-insensitively, so short
+  terms like `ITP` or `EY` don't catch unrelated names.
 - **Never raise `run_cap_usd`** because a run hit the cap. Report that it capped
   and stop. Only raise it when the user supplies the new number themselves.
 - **Every paid Apify add-on stays off** (contacts, social, reviews, images,
@@ -118,4 +144,6 @@ version and the cost Apify reported.
 - `scripts/google_scraper.py` — the runner.
 - `config/segments/<segment>.json` — fallback search terms per segment.
 - `config/exclusions.txt` — fallback exclusion terms, one per line, matched
-  case-insensitively against the firm name and the Google category.
+  case-insensitively (whole word or phrase) against the firm name and the Google
+  category.
+- `config/locations/<segment>_waveN.txt` — location lists for batch runs.
