@@ -74,6 +74,14 @@ they disagree with the SOP, the SOP wins and the fallback should be corrected.
    The run cap covers the **whole** script run across all locations. When it's
    reached, the remaining locations are skipped and reported.
 
+   For a full wave, prefer the guarded wrapper. It refuses to run without a
+   cap, checks `APIFY_TOKEN`, `PIPELINE_RAW_DIR` and that `api.apify.com` is
+   reachable, prints a dry run plus a worst-case place and cost estimate, and
+   asks for a typed `yes`:
+   ```bash
+   scripts/run_wave.sh --cap <USD> --locations config/locations/accounting_wave1.txt
+   ```
+
    **Where `api.apify.com` isn't reachable** (e.g. a sandboxed cloud session),
    run the actor through the Apify connector with the same settings (all paid
    add-ons off, `countryCode: au`, `skipClosedPlaces: true`), save the dataset
@@ -142,6 +150,7 @@ version and the cost Apify reported.
 ## Files
 
 - `scripts/google_scraper.py` — the runner.
+- `scripts/run_wave.sh` — guarded wrapper for batch waves (cap required, confirmation prompt).
 - `config/segments/<segment>.json` — fallback search terms per segment.
 - `config/exclusions.txt` — fallback exclusion terms, one per line, matched
   case-insensitively (whole word or phrase) against the firm name and the Google
