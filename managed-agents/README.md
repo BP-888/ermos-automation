@@ -63,3 +63,9 @@ Commit `claude-lock.json` after each apply. It holds the ids, and without it the
 
 - **Letting internal messages send without approval:** first change the Correspondence rule in hq-approval-gate, then enable the matching tool in `agent.md` and run `ant apply` again.
 - **Pausing it:** `ant beta:deployments pause` on the deployment id. Missed mornings are not backfilled.
+
+## Lead List Agent (`agents/lead-list/`): not built
+
+Decided 20 Oct 2026: no Managed Agent for now. Lenny the Lead List Agent stays the n8n Outbound Extraction Pod (`leadgen-extraction-pod`), which already runs Pod steps 1 to 8 with Claude at the judgement points and Brad's approval at Gate 0 and Gate 1. A hosted agent would duplicate those steps or sit over a chain that is not yet finished.
+
+`agents/lead-list/DECISION.md` has the reasons, the conditions for revisiting (Pod steps 1 to 12 live and evaluated, the Spam Act question settled, enough runs queued that planning them is real work), the run-planner agent that would make sense then, and the conflicts found in the SOPs. Nothing for this agent has been applied, and there is nothing to fill in.
