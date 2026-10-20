@@ -27,24 +27,23 @@ It never sends anything another person sees. Send, invite, post and edit tools a
 
 ## Credentials
 
-One per MCP server, six in all, added in the Console vault (Add credential > Connect), never in this repo. Each is tied to its server URL. The agent has no n8n connection: it only POSTs to the hq-morning-notify webhook, which needs no credential.
+All six are connected in the Console vault `vlt_011CgCxQhrLNh6Y4G437tf79` ("Brad - Morning Brief"), each with Add credential > MCP OAuth > Connect, signed in as Brad (20 Oct 2026). No separate Google, Slack or HubSpot app was needed. Logins live only in the vault, never in this repo, and renew themselves.
 
-| Server | URL | Credential |
-|---|---|---|
-| Gmail | `https://gmailmcp.googleapis.com/mcp/v1` | Google OAuth (scopes `gmail.readonly`, `gmail.compose`). Needs a Google Cloud project with the Gmail MCP service enabled and an OAuth client |
-| Google Calendar | `https://calendarmcp.googleapis.com/mcp/v1` | Google OAuth (read-only calendar scopes), same Google Cloud project and client |
-| Slack | `https://mcp.slack.com/mcp` | Slack OAuth user token from a Slack app with search and history read scopes |
-| HubSpot | `https://mcp.hubspot.com` | HubSpot OAuth from a HubSpot app (client id and secret) |
-| Wispr Flow | `https://api.wisprflow.ai/connect/mcp` | Wispr Flow OAuth (read-only server) |
-| Notion | `https://mcp.notion.com/mcp` | Notion MCP OAuth (not an `ntn_` integration token) |
+| Server | URL |
+|---|---|
+| Gmail | `https://gmailmcp.googleapis.com/mcp/v1` |
+| Google Calendar | `https://calendarmcp.googleapis.com/mcp/v1` |
+| Slack | `https://mcp.slack.com/mcp` |
+| HubSpot | `https://mcp.hubspot.com` |
+| Wispr Flow | `https://api.wisprflow.ai/connect/mcp` |
+| Notion | `https://mcp.notion.com/mcp` |
 
-OAuth credentials carry a refresh token so Anthropic renews them automatically.
+The agent has no n8n connection: it only POSTs to the hq-morning-notify webhook, which needs no credential.
 
 ## Setup order
 
 ```sh
 cd managed-agents
-# first: vault created and six credentials connected in the Console; its vlt_ id in deployment-weekday.md
 ant apply --dry-run -v agents/morning-brief/agent.md agents/morning-brief/environment.yaml agents/morning-brief/deployment-weekday.md
 ant apply agents/morning-brief/agent.md agents/morning-brief/environment.yaml agents/morning-brief/deployment-weekday.md
 export MORNING_BRIEF_DEPLOYMENT_ID=$(jq -r '.resources["./agents/morning-brief/deployment-weekday.md"].id' claude-lock.json)
