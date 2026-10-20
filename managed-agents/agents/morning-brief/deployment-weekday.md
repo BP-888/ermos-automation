@@ -8,7 +8,7 @@ schedule:
   type: cron
   expression: "15 7 * * 1-5"
   timezone: Australia/Sydney
-vault_ids: [VAULT_ID]  # the vlt_... id of the "Brad - Morning Brief" vault, created in the Console
+vault_ids: [vlt_011CgCxQhrLNh6Y4G437tf79]  # "Brad - Morning Brief" vault, created in the Console 20 Oct 2026
 ---
 
 Run today's morning brief for Brad, following your instructions and the hq-morning SOP.

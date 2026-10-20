@@ -24,7 +24,6 @@ It never sends anything another person sees. Send, invite, post and edit tools a
 
 | Placeholder | File | Value |
 |---|---|---|
-| `VAULT_ID` | `deployment-weekday.md` | The `vlt_...` id of the "Brad - Morning Brief" vault, created in the Console (platform.claude.com > Vaults) |
 
 ## Credentials
 
