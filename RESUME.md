@@ -14,7 +14,7 @@ Temporary. Delete this file once we've picked up.
 ## What I need from you
 1. ~~The Notion page for briefs~~: done 20 Oct, Ermos Ops / Morning Briefs.
 2. ~~Logins~~: all six connected in vault vlt_011CgCxQhrLNh6Y4G437tf79, 20 Oct.
-3. **Anthropic API key:** Brad to add ANTHROPIC_API_KEY in this cloud environment's settings (picked up by a new session). Then install `ant` and apply.
+3. ~~API key~~: saved as the ANTHROPIC_API_KEY environment variable, 20 Oct. **Next session starts here:** confirm the key is visible (without printing it), ask Brad before installing `ant`, show the dry-run plan, apply only on his go, then run one test brief with `python managed-agents/brief.py run`.
 4. **Go or no-go** on rebuilding Reply Desk and Meeting Actions as n8n workflows.
 5. **Two rulings from Reply Desk:**
    - Cold-email replies land in the Smartlead mailboxes, not your Gmail. Where should reply drafts go?
