@@ -1,0 +1,3 @@
+name: meeting-actions-env
+# Locked down: the agent only reaches its MCP servers. No package installs, no open web.
+config: {type: cloud, networking: {type: limited, allow_mcp_servers: true}}
