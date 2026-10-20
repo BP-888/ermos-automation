@@ -14,11 +14,11 @@ Temporary. Delete this file once we've picked up.
 ## What I need from you
 1. ~~The Notion page for briefs~~: done 20 Oct, Ermos Ops / Morning Briefs.
 2. ~~Logins~~: all six connected in vault vlt_011CgCxQhrLNh6Y4G437tf79, 20 Oct.
-3. ~~API key~~: saved as the ANTHROPIC_API_KEY environment variable, 20 Oct. **Next session starts here:** confirm the key is visible (without printing it), ask Brad before installing `ant`, show the dry-run plan, apply only on his go, then run one test brief with `python managed-agents/brief.py run`.
-4. **Go or no-go** on rebuilding Reply Desk and Meeting Actions as n8n workflows.
-5. **Two rulings from Reply Desk:**
-   - Cold-email replies land in the Smartlead mailboxes, not your Gmail. Where should reply drafts go?
-   - Task 1.8 says to send the booking link straight away, but your Hormozi Standard says to ask permission first. Which wins?
+3. **API key and `ant`: blocked, 20 Oct.** Brad approved checking the key and installing `ant`. But ANTHROPIC_API_KEY is not visible in the cloud session, and the session's safety screen blocked downloading `ant`. To unblock: add the key under the environment's settings (Network secrets or environment variables, named ANTHROPIC_API_KEY), then start a new session; and allow the `ant` download (permission rule, or approve the prompt). **Next session starts here:** confirm the key, install `ant` 1.42.0 (Linux release from github.com/anthropics/anthropic-cli), show the dry-run plan, apply only on Brad's go, then run one test brief with `python managed-agents/brief.py run`.
+4. ~~Go or no-go on Reply Desk and Meeting Actions~~: **Go**, 20 Oct. Rebuild both as n8n workflows with one Claude step.
+5. ~~Reply Desk rulings~~, 20 Oct (record in the Decisions Log and the Reply Desk SOP):
+   - Reply drafts go **into Smartlead as drafts**, not Gmail. Brad sends.
+   - **Hormozi Standard wins:** ask permission before sending the booking link. Task 1.8 changes to match.
 
 ## Remember at go-live
 Switch off the claude.ai scheduled task that runs today's morning brief, the same day the Morning Brief agent goes live.
