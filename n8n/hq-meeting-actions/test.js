@@ -10,6 +10,8 @@ const done={results:[{properties:{'Meeting ID':{rich_text:[{plain_text:'m2'}]}}}
 let p=run('pick.js',[],{'Find meetings':[{json:found}],'Read done meetings':[{json:done}]})[0].json;
 assert.deepEqual(p.meetings.map(m=>m.meeting_id),['m1']); assert.equal(p.skipped.length,3);
 p=run('pick.js',[],{'Find meetings':[{json:mcpWrap({meetings:[]})}],'Read done meetings':[{json:{results:[]}}]})[0].json; assert.equal(p.count,0);
+p=run('pick.js',[],{'Find meetings':[{json:{structuredContent:{meetings:[{id:'m9',title:'Real shape',end_time:'2026-10-19T23:00:00Z',has_transcript:true}]},content:[{type:'text',text:{meetings:[]}}]}}],'Read done meetings':[{json:{results:[]}}]})[0].json; assert.equal(p.count,1);
+p=run('pick.js',[],{'Find meetings':[{json:{content:[{type:'text',text:{meetings:[{id:'m8',end_time:'2026-10-19T23:00:00Z',has_transcript:true}]}}]}}],'Read done meetings':[{json:{results:[]}}]})[0].json; assert.equal(p.count,1);
 console.log('pick ok');
 // assemble
 const split=[{json:{meeting_id:'m1',title:'Team sync',start:'2026-10-19T22:00:00Z',share_link:'https://x/m1'}}];
@@ -17,9 +19,12 @@ const t1=[{json:mcpWrap({transcript:'[00:01] Brad: Will, can you send the propos
 const t2=[{json:mcpWrap({transcript:'[40:00] David: done.'})}];
 const t3=[{json:{error:'out of range'}}];
 const who=[{json:mcpWrap({participants:[{name:'Will',relationship:'colleague',spoke:true}]})}];
+let a2;
 let a=run('assemble.js',[],{'Split meetings':split,'Transcript part 1':t1,'Transcript part 2':t2,'Transcript part 3':t3,'Who was there':who})[0].json;
 assert.ok(a.transcript.includes('Yes I will.')&&a.transcript.includes('David: done.')&&!a.transcript.includes('truncated'));
 assert.equal(a.transcript_cut,false); assert.equal(a.attendees[0].name,'Will');
+a2=run('assemble.js',[],{'Split meetings':split,'Transcript part 1':[{json:{structuredContent:{transcript:'[00:01] hello',summary:'S'}}}],'Transcript part 2':t3,'Transcript part 3':t3,'Who was there':[{json:{structuredContent:{participants:[{name:'Will'}]}}}]})[0].json;
+assert.equal(a2.transcript,'[00:01] hello'); assert.equal(a2.attendees[0].name,'Will');
 console.log('assemble ok');
 // rows
 const ai={personal:false,meeting_type:'Team',decisions:['Go with Smartlead'],open_questions:[],parked:[],flags_for_brad:[],actions:[

@@ -2,7 +2,10 @@
 // ---8<---
 const mcp = function (x) {
   if (!x) { return {}; }
+  if (x.structuredContent && typeof x.structuredContent === 'object') { return x.structuredContent; }
   if (Array.isArray(x.content)) {
+    const obj = x.content.filter(function (c) { return c && c.type === 'text' && c.text && typeof c.text === 'object'; })[0];
+    if (obj) { return obj.text; }
     const t = x.content.filter(function (c) { return c && c.type === 'text'; }).map(function (c) { return c.text; }).join('\n');
     try { return JSON.parse(t); } catch (e) { return { text: t }; }
   }
