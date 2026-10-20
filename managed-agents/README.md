@@ -17,7 +17,6 @@ It never sends anything another person sees. Send, invite, post and edit tools a
 |---|---|
 | `agent.md` | Model, tools (allowlist per service), MCP servers, and the instructions (system prompt) |
 | `environment.yaml` | The sandbox: locked to the MCP servers and the n8n webhook host only |
-| `vault.yaml` | The credential store (container only, no secrets in this repo) |
 | `deployment-weekday.md` | The 7:15am weekday schedule |
 | `brief.py` (in `managed-agents/`) | `run` starts a test run now and streams it; `latest` lists recent runs |
 
@@ -25,11 +24,11 @@ It never sends anything another person sees. Send, invite, post and edit tools a
 
 | Placeholder | File | Value |
 |---|---|---|
-| `VAULT_ID` | `deployment-weekday.md` | The `vlt_...` id, after the vault is applied |
+| `VAULT_ID` | `deployment-weekday.md` | The `vlt_...` id of the "Brad - Morning Brief" vault, created in the Console (platform.claude.com > Vaults) |
 
 ## Credentials
 
-One per MCP server, six in all, stored in the vault and never in this repo. Each is tied to its server URL. The agent has no n8n connection: it only POSTs to the hq-morning-notify webhook, which needs no credential.
+One per MCP server, six in all, added in the Console vault (Add credential > Connect), never in this repo. Each is tied to its server URL. The agent has no n8n connection: it only POSTs to the hq-morning-notify webhook, which needs no credential.
 
 | Server | URL | Credential |
 |---|---|---|
@@ -46,10 +45,9 @@ OAuth credentials carry a refresh token so Anthropic renews them automatically.
 
 ```sh
 cd managed-agents
-ant apply --dry-run -v agents/morning-brief/vault.yaml agents/morning-brief/agent.md agents/morning-brief/environment.yaml
-ant apply agents/morning-brief/vault.yaml agents/morning-brief/agent.md agents/morning-brief/environment.yaml
-# add the six credentials to the vault, put its vlt_ id in deployment-weekday.md, then:
-ant apply agents/morning-brief/deployment-weekday.md
+# first: vault created and six credentials connected in the Console; its vlt_ id in deployment-weekday.md
+ant apply --dry-run -v agents/morning-brief/agent.md agents/morning-brief/environment.yaml agents/morning-brief/deployment-weekday.md
+ant apply agents/morning-brief/agent.md agents/morning-brief/environment.yaml agents/morning-brief/deployment-weekday.md
 export MORNING_BRIEF_DEPLOYMENT_ID=$(jq -r '.resources["./agents/morning-brief/deployment-weekday.md"].id' claude-lock.json)
 python brief.py run   # test run before the first 7:15am firing
 ```

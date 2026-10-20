@@ -1,4 +1,0 @@
-type: vault
-display_name: Brad - Morning Brief
-# Container only. Credentials are added separately and never live in this repo:
-# see managed-agents/README.md -> Credentials.

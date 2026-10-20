@@ -8,7 +8,7 @@ schedule:
   type: cron
   expression: "15 7 * * 1-5"
   timezone: Australia/Sydney
-vault_ids: [VAULT_ID]  # replace with the vlt_... id from claude-lock.json after the vault is applied
+vault_ids: [VAULT_ID]  # the vlt_... id of the "Brad - Morning Brief" vault, created in the Console
 ---
 
 Run today's morning brief for Brad, following your instructions and the hq-morning SOP.

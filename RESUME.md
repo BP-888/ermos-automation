@@ -13,7 +13,7 @@ Temporary. Delete this file once we've picked up.
 
 ## What I need from you
 1. ~~The Notion page for briefs~~: done 20 Oct, Ermos Ops / Morning Briefs.
-2. **Logins** for Gmail, Google Calendar, Slack, HubSpot, Wispr Flow and Notion. Do you want a step-by-step guide?
+2. **Logins:** guide written 20 Oct at Ermos Ops / "Morning Brief logins: setup guide (temporary)". Waiting on Brad (Parts 1-2) and Will (Parts 3-5).
 3. **An Anthropic API key**, or the go-ahead to install the `ant` tool, so I can set the agent up and do a test run.
 4. **Go or no-go** on rebuilding Reply Desk and Meeting Actions as n8n workflows.
 5. **Two rulings from Reply Desk:**
