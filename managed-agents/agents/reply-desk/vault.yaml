@@ -1,0 +1,4 @@
+type: vault
+display_name: Brad - Reply Desk
+# Container only. Credentials are added separately and never live in this repo:
+# see managed-agents/README.md -> Reply Desk -> Credentials.
