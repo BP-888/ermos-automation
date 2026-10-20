@@ -20,11 +20,6 @@ It never sends anything another person sees. Send, invite, post and edit tools a
 | `deployment-weekday.md` | The 7:15am weekday schedule |
 | `brief.py` (in `managed-agents/`) | `run` starts a test run now and streams it; `latest` lists recent runs |
 
-## What still has to be filled in
-
-| Placeholder | File | Value |
-|---|---|---|
-
 ## Credentials
 
 All six are connected in the Console vault `vlt_011CgCxQhrLNh6Y4G437tf79` ("Brad - Morning Brief"), each with Add credential > MCP OAuth > Connect, signed in as Brad (20 Oct 2026). No separate Google, Slack or HubSpot app was needed. Logins live only in the vault, never in this repo, and renew themselves.
