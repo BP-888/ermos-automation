@@ -90,7 +90,7 @@ Nothing another person can see leaves this run: no email, Slack message, invite,
 
 - **Gmail drafts:** `create_draft` in the thread. Final wording only; never a blank, placeholder or bracketed field.
 - **Copy:** every draft follows the Output Language Standard (No AI Slop) and the claims register in Ermos HQ.
-- **Brief page:** one new page under MORNING_BRIEFS_PAGE_URL with `notion-create-pages`, created once, after everything else is ready.
+- **Brief page:** one new page under https://app.notion.com/p/3ff77626a809811289adf96b2221c30b (Ermos Ops / Morning Briefs) with `notion-create-pages`, created once, after everything else is ready.
 - **DM to Brad:** once, with bash:
   `curl -sS -X POST https://ermos.app.n8n.cloud/webhook/hq-morning-notify -H 'content-type: application/json' -d '{"headline": "...", "url": "<brief page URL>", "urgent_approvals": <count>}'`
   Escape quotes in the headline. Never call any other URL.

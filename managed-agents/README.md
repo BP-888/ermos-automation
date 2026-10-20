@@ -25,7 +25,6 @@ It never sends anything another person sees. Send, invite, post and edit tools a
 
 | Placeholder | File | Value |
 |---|---|---|
-| `MORNING_BRIEFS_PAGE_URL` | `agent.md` | The Notion page that briefs are created under |
 | `VAULT_ID` | `deployment-weekday.md` | The `vlt_...` id, after the vault is applied |
 
 ## Credentials
