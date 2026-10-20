@@ -21,6 +21,6 @@ Anthropic's own guidance decides every question about agent architecture, workfl
 - The framework is locked (Decisions Log, 16 Oct 2026): Function → Capability → Workflow → Tool. When operations change, change the SOP, never the framework.
 - Ermos HQ in Notion holds the rules; this repo holds only code and config. How anything is built: HQ / 01 Standards / AI Operating System Architecture (https://app.notion.com/p/3f277626a80981f99612e592b4301540). Read it before designing anything.
 - **Write over, don't add** (Master Brief RULE 4). When something changes, rewrite the page or file that holds it and delete or mark Superseded what it replaces. Never leave a second copy of a rule, here or in Notion.
-- Nothing another person reads is sent without Brad's approval (hq-approval-gate, Correspondence rule). Automations draft; Brad sends.
+- Nothing another person reads is sent without Brad's approval (hq-approval-gate, Correspondence rule). Automations draft; Brad sends. One exception (Brad, 20 Oct 2026): revenue-reply-desk sends a routine low-risk warm reply after 4 business hours unless Brad stops it; the rule page sets the conditions.
 - Credit-spending tools always sit behind a gate.
 - Brad is not technical: explain outcomes in plain English and decide technical details yourself.
