@@ -29,6 +29,18 @@ Anthropic's guidance ("Building effective agents") separates **workflows**, wher
 
 Rule: **at most one Managed Agent per engine, and most engines need none.** Within an engine, each task uses the simplest block that works.
 
+The named patterns from Anthropic's guidance, as they show up here:
+
+| Pattern | Where it fits in ERMOS |
+|---|---|
+| Prompt chaining (fixed steps in order) | Lead list pod, onboarding, meeting notes to actions |
+| Routing (classify, then send to the right path) | Cold reply handling (1.7): positive, objection, unsubscribe |
+| Parallelization (independent pieces at once) | Checking many firms or many sources in one run |
+| Evaluator-optimizer (draft, check, revise) | The copy gate: every draft is checked against No AI Slop and the claims register |
+| Agent (Claude decides the steps) | Morning Brief only, for now |
+
+Sources: see section 10. Where they disagree with this file, they win.
+
 ## 4. Every engine, sorted
 
 | Engine | Tasks | Built as |
@@ -100,3 +112,10 @@ That gives one Managed Agent now (Morning Brief) and three candidates, each buil
 
 - The engine map lists tasks 9.10 to 9.15, but "Everything I Do" stops at 9.9.
 - The `hq-approval-gate` n8n workflow is built but switched off.
+
+## 10. Sources (Anthropic, the source of truth)
+
+1. Building effective agents: https://www.anthropic.com/engineering/building-effective-agents
+2. Claude Code best practices: https://code.claude.com/docs/en/best-practices
+3. Writing effective tools for agents: https://www.anthropic.com/engineering/writing-tools-for-agents
+4. Common workflow patterns for AI agents: https://claude.com/resources/articles/common-workflow-patterns-for-ai-agents-and-when-to-use-them
