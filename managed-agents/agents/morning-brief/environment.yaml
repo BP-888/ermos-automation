@@ -1,3 +1,6 @@
 name: morning-brief-env
-# Locked down: the agent only reaches its MCP servers. No package installs, no open web.
-config: {type: cloud, networking: {type: limited, allow_mcp_servers: true}}
+# Locked down: MCP servers plus the n8n host for the hq-morning-notify webhook.
+# No package installs, no open web.
+config:
+  type: cloud
+  networking: {type: limited, allow_mcp_servers: true, allowed_hosts: [ermos.app.n8n.cloud]}
