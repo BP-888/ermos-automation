@@ -1,0 +1,63 @@
+# Accounting sprint, wave 1: high-density business suburbs in the five largest metros.
+# Format: Suburb,STATE (one per line). Use ALL,<STATE> for a state-wide run.
+# Proposed by Claude Code for Brad, 2 Oct 2026. Edit freely before the batch.
+
+# Sydney
+Sydney,NSW
+North Sydney,NSW
+Chatswood,NSW
+Parramatta,NSW
+Castle Hill,NSW
+Bondi Junction,NSW
+Hurstville,NSW
+Liverpool,NSW
+Penrith,NSW
+Hornsby,NSW
+Burwood,NSW
+Bankstown,NSW
+Sutherland,NSW
+Macquarie Park,NSW
+Norwest,NSW
+
+# Melbourne
+Melbourne,VIC
+South Melbourne,VIC
+Richmond,VIC
+Box Hill,VIC
+Camberwell,VIC
+Glen Waverley,VIC
+Doncaster,VIC
+Dandenong,VIC
+Frankston,VIC
+Footscray,VIC
+Moonee Ponds,VIC
+Ringwood,VIC
+Brighton,VIC
+
+# Brisbane and South East Queensland
+Brisbane City,QLD
+Fortitude Valley,QLD
+Milton,QLD
+Toowong,QLD
+Chermside,QLD
+Indooroopilly,QLD
+Springwood,QLD
+Southport,QLD
+Maroochydore,QLD
+
+# Perth
+Perth,WA
+West Perth,WA
+Subiaco,WA
+Joondalup,WA
+Osborne Park,WA
+Fremantle,WA
+
+# Adelaide
+Adelaide,SA
+Norwood,SA
+Unley,SA
+
+# Canberra
+Canberra,ACT
+Belconnen,ACT

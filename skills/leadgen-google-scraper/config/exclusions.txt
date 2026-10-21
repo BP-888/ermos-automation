@@ -1,10 +1,39 @@
 # Exclusions for leadgen-google-scraper.
-# One term per line. Case-insensitive substring match against the firm name
-# and the Google category. Lines beginning with # are ignored.
+# One term per line. Case-insensitive, whole-word (or whole-phrase) match
+# against the firm name and the Google category. Lines beginning with # are ignored.
 #
-# The authoritative exclusion list lives in the Notion SOP. This file is the
-# script's fallback and must be kept in step with the SOP.
+# The authoritative exclusion list lives in the Notion SOP (03 SOPs >
+# leadgen-google-scraper). This file is the script's fallback and must be kept
+# in step with the SOP.
+
+# Tax-return franchises (not independent practices)
 H&R Block
 Liberty Tax
 ITP
 Etax
+
+# Big 4 and large mid-tier networks (over 50 staff: disqualified, ERMOS ruling 2 Oct 2026)
+Deloitte
+PwC
+PricewaterhouseCoopers
+KPMG
+EY
+Ernst & Young
+BDO
+Grant Thornton
+RSM
+Pitcher Partners
+William Buck
+Bentleys
+Crowe
+Nexia
+Baker Tilly
+Findex
+Moore Australia
+HLB Mann Judd
+Hall Chadwick
+Prosperity Advisers
+Vincents
+
+# Government
+Australian Taxation Office
