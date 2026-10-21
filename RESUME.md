@@ -10,6 +10,8 @@ Temporary. Delete this file once we've picked up.
 - **HQ updated 20 Oct (write over):** Hormozi Standard v2.1, hq-approval-gate v0.3 (silent expiry), Everything I Do 1.7 and 1.8, Decisions Log entry.
 - **Lead List:** stays in the n8n pod; needs n8n setup items and rulings from Brad.
 
+- **Repo tidy (21 Oct):** `main` created from this branch plus the scraper wave runner (`claude/brave-darwin-ohugkg`). Old branches kept as `archive/*` tags before deletion. Brad still to: set `main` as the default branch, rename the repo to `ermos-automation`. Then delete the old `claude/*` branches.
+
 ## What I need from Brad
 1. **Seed test (drafting lane):** Smartlead had not sent step 1 to brad@ermos.com.au by 11:11am 21 Oct; re-check scheduled 1:30pm. When it arrives, Brad replies "Can we book a call?" and checks #hq-approvals.
 2. **The 3-Minute AI Exposure Check link** for the Hormozi Standard section 3. Until then every "yes please" reply goes to Brad to answer himself.

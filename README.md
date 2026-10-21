@@ -1,56 +1,33 @@
-# b2b-outbound-engine
+# Ermos automation
 
-A Claude Code plugin holding the skills that run the B2B outbound pipeline, from
-raw lead collection through to outreach.
+Code and config for everything that runs on its own at Ermos. The rules live in Ermos HQ (Notion); this repo holds only what builds and runs them. How anything is built: HQ / 01 Standards / AI Operating System Architecture.
 
-## Skill naming
+See what's running, and what's waiting on Brad: [Ermos Operating Map](https://claude.ai/artifact/JW9jxTrEA6wdQoSJZxxF9h).
 
-Every skill name carries its department prefix:
+## Where each piece runs
 
-| Prefix | Department |
-|---|---|
-| `hq-` | Coordination and reporting |
-| `leadgen-` | Finding and collecting raw leads |
-| `enrichment-` | Filling out and verifying lead records |
-| `outreach-` | Contacting leads |
+| Folder | Runs in | Use when (HQ architecture, section 3) |
+|---|---|---|
+| `n8n/` | n8n ([ermos.app.n8n.cloud](https://ermos.app.n8n.cloud)) | Fixed steps, with at most one Claude judgement per item. Each subfolder holds one workflow's Code steps, Claude prompt and tests. See `n8n/README.md`. |
+| `managed-agents/` | Claude Managed Agents | Open-ended work that can't be scripted. Today only the Morning Brief. See `managed-agents/README.md`. |
+| `skills/` + `.claude-plugin/` | Claude Code / Cowork (plugin `b2b-outbound-engine`) | Brad starts it and works live with Claude. |
 
-## Skills
+## Working in this repo
 
-### `leadgen-google-scraper`
-
-Scrapes Google Maps business listings into a raw CSV for the pipeline, via the
-Apify actor `compass/crawler-google-places`. Triggers on requests such as
-"scrape Google Maps", "find firms on Google", "run the Google scraper", or
-"pull accounting businesses in Parramatta".
-
-Writes one CSV per run to `PIPELINE_RAW_DIR` on a fixed 18-column schema, plus a
-`.run.json` manifest recording the actor input, run ids, row counts, SOP version
-and the cost Apify reported. It collects only what Google Maps lists — it does
-not enrich and it does not contact anyone.
-
-Operating values (search terms, thresholds, spend caps, exclusion rules) live in
-the Notion SOP, which the skill reads before every run and which must be marked
-`Approved`. The files under `config/` are fallbacks and must be kept in step
-with the SOP.
+- `main` is always the current, working version. Every Claude Code session starts from it.
+- Each session works on its own branch, merges into `main` when the work is tested, and the branch is then deleted.
+- `RESUME.md`, when present, is the note for picking up paused work. Delete it once picked up.
+- Write over, don't add: when something changes, change the file that holds it. Don't keep a second copy, here or in Notion.
 
 ## Conventions
 
-- **Secrets come from the environment**, never from a file in this repository.
-  `leadgen-google-scraper` reads `APIFY_TOKEN` and `PIPELINE_RAW_DIR`.
-- **Scripts are Python standard library plus `requests`.**
-- **Australian English** throughout.
-- Skills that spend money carry an explicit run cap and always pilot before a
-  batch.
+- Secrets come from the environment or the tool's own credential store (n8n, the Claude Console vault), never from a file in this repo.
+- Scripts are Python standard library plus `requests`, or plain Node for n8n Code steps.
+- Australian English throughout.
+- Anything that spends credits has a run cap and pilots before a batch.
 
-## Layout
+## Skill naming
 
-```
-.claude-plugin/plugin.json
-skills/
-└── leadgen-google-scraper/
-    ├── SKILL.md
-    ├── scripts/google_scraper.py
-    └── config/
-        ├── exclusions.txt
-        └── segments/accounting.json
-```
+Every skill name carries its department prefix: `hq-` (coordination and reporting), `leadgen-` (finding raw leads), `enrichment-` (filling out and verifying lead records), `outreach-` (contacting leads).
+
+`skills/leadgen-google-scraper` scrapes Google Maps listings into a raw CSV via the Apify actor `compass/crawler-google-places`; `scripts/run_wave.sh` runs a capped wave over a locations file. Operating values come from the Notion SOP, which must be `Approved`; the files under `config/` are fallbacks kept in step with it.
