@@ -10,7 +10,7 @@ Temporary. Delete this file once we've picked up.
 - **HQ updated 20 Oct (write over):** Hormozi Standard v2.1, hq-approval-gate v0.3 (silent expiry), Everything I Do 1.7 and 1.8, Decisions Log entry.
 - **Lead List:** stays in the n8n pod; needs n8n setup items and rulings from Brad.
 
-- **Repo tidy (21 Oct):** `main` created from this branch plus the scraper wave runner (`claude/brave-darwin-ohugkg`). Old branches kept as `archive/*` tags before deletion. Brad still to: set `main` as the default branch, rename the repo to `ermos-automation`. Then delete the old `claude/*` branches.
+- **Repo tidy (21 Oct):** `main` created from this branch plus the scraper wave runner (`claude/brave-darwin-ohugkg`). Tests pass on `main`. GitHub refused `archive/*` tags from the session, and the session may not delete branches, so Brad does those in GitHub. Brad still to: (1) set `main` as the default branch, (2) rename the repo to `ermos-automation`, (3) delete branches `claude/brave-darwin-ohugkg`, `claude/beautiful-cori-2ncjud`, `claude/zen-hawking-isjmkj` (all fully inside `main`). Branches `claude/agent-reply-desk`, `claude/agent-meeting-actions` and `claude/agent-lead-list` hold superseded agent designs (replaced by the n8n builds; the HQ architecture page holds the decision). They are the only copy, so delete them only on Brad's word.
 
 ## What I need from Brad
 1. **Seed test (drafting lane):** Smartlead had not sent step 1 to brad@ermos.com.au by 11:11am 21 Oct; re-check scheduled 1:30pm. When it arrives, Brad replies "Can we book a call?" and checks #hq-approvals.
