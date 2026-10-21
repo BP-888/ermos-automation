@@ -23,4 +23,14 @@ Anthropic's own guidance decides every question about agent architecture, workfl
 - **Write over, don't add** (Master Brief RULE 4). When something changes, rewrite the page or file that holds it and delete or mark Superseded what it replaces. Never leave a second copy of a rule, here or in Notion.
 - Nothing another person reads is sent without Brad's approval (hq-approval-gate, Correspondence rule). Automations draft; Brad sends. One exception (Brad, 20 Oct 2026): revenue-reply-desk sends a routine low-risk warm reply after 4 business hours unless Brad stops it; the rule page sets the conditions.
 - Credit-spending tools always sit behind a gate.
+
+## Definition of done (Decisions Log, "Where work happens", 21 Oct 2026, R6)
+
+A workflow is not finished until it:
+
+1. has a record in the HQ Workflows database with its n8n URL, Run Log tool name (exactly as the workflow writes it) and Expected every (days);
+2. is linked to its Everything I Do task Ref (the task's HQ workflows relation);
+3. writes every run to the Run Log through hq-log-run.
+
+That is what puts it on the dashboard live. Until all three hold, report it as built, not done. The Decisions Log page is the master; change this section only when that ruling changes.
 - Brad is not technical: explain outcomes in plain English and decide technical details yourself.
