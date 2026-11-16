@@ -1,6 +1,42 @@
-# Resume: Agentic Agent System (paused 20 Oct 2026, 7:45pm Sydney)
+# Resume notes
 
-Temporary. Delete this file once we've picked up.
+Temporary. Delete each section once it is picked up; delete the file when none remain.
+
+# Collateral for Flyers (paused 16 Nov 2026; resume 17 Nov, 9:30am Sydney)
+
+Session: "Collateral for Flyers". Presentations get their own later session, "Collateral for Presentations". Video is last and parked.
+
+## Agreed with Brad (16 Nov)
+- Look and feel: the Outbound Collateral Style Guide v2.1 is correct for all outbound collateral.
+- Images: Brad generates in Ideogram or licenses stock from 123RF; Claude turns them into the finished piece. No generator makes the finished branded asset.
+- Copy: every piece goes through the shared marketing-copy skill, No AI Slop and the Hormozi Standard. Quality bar: high impact, punchy, interesting.
+- Facts and audience for outbound collateral: the selected ICP page first (proposed: the Claims Register still blocks unsupported product claims).
+- Order: LinkedIn (being built now) -> Facebook and Instagram organic posts -> video. No paid ads.
+- marketing-copy becomes the one copy step every channel calls; its rules live only there.
+
+## Done
+- HQ Proposed Change: "B2B sounding board for marketing-copy review" (Hormozi lead; Dunford, Ehrenberg-Bass/B2B Institute, Wiebe, Walker): https://app.notion.com/p/41a77626a809819eb2adccc6daa690e2. Waiting on Brad.
+- B2B best-practice research for Australian AI/IT (in chat, 16 Nov): win before the first call, lead with trust and assurance, show you understand the specific problem, build memory for the 95%, sell practical outcomes, arm the champion, no AI washing.
+
+## HQ edits listed for Brad (not made; Brad said he would make them)
+1. marketing-copy s1: add "high impact, punchy and interesting"; read the ICP page first for outbound collateral.
+2. Outbound Collateral Style Guide s7: name Ideogram and 123RF; copy the stock licence rule from marketing-linkedin-posts.
+3. Decisions Log: LinkedIn -> Facebook/Instagram organic -> video.
+4. Business Brain (HAU) 05 Tools: paid Meta ads line conflicts; correct or mark Superseded.
+5. marketing-flyers: step 2 names the ICP page; step 6 adds 123RF; s9 item 4 (style guide still Draft) is stale.
+
+## Flyer process today (marketing-flyers V4)
+11 steps, two gates: concept -> ground brief -> brief -> copy and review (marketing-copy) -> Gate 1 copy -> image (Ideogram by hand) -> build from master HTML -> export check -> review -> Gate 2 -> file and register.
+
+## Tomorrow: what Claude needs from Brad to draw the flyer process flow
+See the checklist in chat, 16 Nov. In short: rulings on the Proposed Change and HQ edits, the flow's format and home, who runs Ideogram/123RF, a real flyer concept to walk through, and access to ~/ERMOS Files.
+
+## Still open (no action until LinkedIn ships)
+- No Facebook Page; Metricool has no social account connected (checked 16 Nov).
+- marketing-copy-gate not built; marketing-copy skill not validated.
+- Wispr Flow has no meetings recorded since August (voice-of-customer source).
+
+# Agentic Agent System (paused 20 Oct 2026, 7:45pm Sydney)
 
 ## Where we are
 - **Reply Desk (tasks 1.7, 1.8): LIVE since 20 Oct 2026, 7:40pm.** n8n `revenue-reply-desk` (78doWUk0vqhytWHO) is published. Smartlead sends replies to it through campaign webhooks 927340 (campaign 4122423, TEST_CopyA) and 927339 (campaign 4042388, Accounting Q4); read back and confirmed. Pattern: routing. Lanes: routine interested or meeting reply sends after 4 business hours unless Brad taps Don't send; other drafts need his tap (48 hour expiry); pricing, security, complaints and instructions get no draft; out of office and unsubscribe are logged only.
