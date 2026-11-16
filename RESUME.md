@@ -29,7 +29,12 @@ Session: "Collateral for Flyers". Presentations get their own later session, "Co
 11 steps, two gates: concept -> ground brief -> brief -> copy and review (marketing-copy) -> Gate 1 copy -> image (Ideogram by hand) -> build from master HTML -> export check -> review -> Gate 2 -> file and register.
 
 ## Tomorrow: what Claude needs from Brad to draw the flyer process flow
-See the checklist in chat, 16 Nov. In short: rulings on the Proposed Change and HQ edits, the flow's format and home, who runs Ideogram/123RF, a real flyer concept to walk through, and access to ~/ERMOS Files.
+1. Approve, change or reject the B2B sounding board Proposed Change.
+2. The five HQ edits above: has Brad made them, or should Claude?
+3. Format and home for the flow: a visual diagram on the marketing-flyers page (recommended) or a Miro board.
+4. Who generates Ideogram images and buys 123RF licences (Brad assumed), and where licence records go.
+5. One real flyer to walk through end to end (candidates: Barristers V3 finish, or the first Aged Care brief).
+6. Access to ~/ERMOS Files on Brad's Mac (connect the folder, or upload the master source, Dominion render and images).
 
 ## Still open (no action until LinkedIn ships)
 - No Facebook Page; Metricool has no social account connected (checked 16 Nov).
