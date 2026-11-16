@@ -12,7 +12,7 @@ Anthropic's own guidance decides every question about agent architecture, workfl
 ## Non-negotiable rules
 
 - **Simplest thing that works.** Build fixed workflows first (n8n, or a chain of Claude calls). Propose a Managed Agent only when the work is open-ended, can't be scripted step by step, and is worth the extra cost. Say which named pattern you are using (prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer, agent) and why nothing simpler fits.
-- **Explore → Plan → Implement → Verify** for any non-trivial change. Read first, write the plan, build, then check.
+- **See what we have, question it, then build (Brad, 17 Nov 2026).** The operating system is built and run through Claude Code, by refining what exists or adding sensible workflow automations, never by rebuilding. Before any build: list what already exists for the job (n8n, HQ, skills, artifacts, this repo), say what to keep, fix or retire, and ask whether the new thing is needed at all. Then Explore → Plan → Implement → Verify: read first, write the plan, build, then check.
 - **Evidence over assertion.** Show the test output, the command and what it returned, or the diff. Never say something works without showing it.
 - **Tools:** few, specific, clearly described; return only high-signal results; page or filter large outputs.
 
