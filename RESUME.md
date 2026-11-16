@@ -2,7 +2,7 @@
 
 Temporary. Delete each section once it is picked up; delete the file when none remain.
 
-# Collateral for Flyers (paused 16 Nov 2026; resume 17 Nov, 11am Sydney)
+# Collateral for Flyers (paused 16 Nov 2026; resume 17 Nov, 9:30am Sydney)
 
 Session: "Collateral for Flyers". Presentations get their own later session, "Collateral for Presentations". Video is last and parked.
 
