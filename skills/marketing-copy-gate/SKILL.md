@@ -70,6 +70,20 @@ Never add a claim, number or example the source didn't have. Re-run Step 2 and S
 on the revised copy. If something still fails after two loops, stop and list it as a
 blocker rather than writing around it.
 
+## Step 4b: clean every file before it is published (standing rule, Brad 17 Nov 2026)
+
+Nothing published shows how it was made. For every PDF or image that goes out:
+
+```
+python3 skills/marketing-copy-gate/scripts/clean_file.py clean <file.pdf> --title "<the public title>"
+```
+
+This writes a copy named after the public title, with the hidden Title set to it and
+Author, Creator and Producer set to ERMOS, then checks it. The check fails on version
+numbers (V4, V6), draft, template, final, master, REF_/MOOD_/AVOID_ prefixes and tool
+names (Chrome, Skia, Canva, Ideogram) in the file name or hidden properties. Publish
+only the cleaned copy. `clean_file.py check <file>` checks a file without changing it.
+
 ## Step 5: report (the SOP's output contract)
 
 Return, in this order:
