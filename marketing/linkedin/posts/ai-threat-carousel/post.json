@@ -28,6 +28,57 @@
     "date": "2026-11-17",
     "evidence": "Brad: 'use my Ideogram image'"
    }
+  },
+  {
+   "slide": 5,
+   "source": "123rf",
+   "id": "196005612",
+   "listing": "https://www.123rf.com/photo_196005612_.html",
+   "type_label": "Stock Photo",
+   "ai_generated": false,
+   "editorial_only": false,
+   "licensed": {
+    "by": "Brad",
+    "date": "2026-11-17",
+    "evidence": "Brad: 'Done. Agreed, that's all three photos'"
+   },
+   "file": "images/123rf-196005612.jpg"
   }
- ]
+ ],
+ "public_title": "If you lost 10 years of IP overnight, what is your next move",
+ "carousel_pdf": "If you lost 10 years of IP overnight, what is your next move.pdf",
+ "caption_file": "caption.txt",
+ "checked_on": "2026-11-17",
+ "review_title": "AI Threat Post Review",
+ "research": {
+  "sources": [
+   {
+    "title": "Cyber security incident statement (major Australian supermarket chain)",
+    "publisher": "Coles Group",
+    "date": "2026-11-16",
+    "url": "https://www.colesgroup.com.au/updates/",
+    "verified_point": "Working through a cyber incident with the ACSC and global experts; operations continue; 'a time of increasing cyber incidents in Australia and around the world'",
+    "where": "Updates page, statement current as at 16 Nov 2026 8:30am",
+    "note": "Quoted unnamed (Brad, 17 Nov 2026). AI's role is stated as ERMOS's view ('we think'), not as fact, until ASD's threat report is read"
+   }
+  ]
+ },
+ "topic": {
+  "text": "AI-enabled attacks after the 16 Nov supermarket cyber incident: what it means for a 30-person business",
+  "approved": {
+   "by": "Brad",
+   "date": "2026-11-17",
+   "evidence": "Brad's brief: rework the carousel around AI-enabled attacks and asymmetric risk for SMEs"
+  }
+ },
+ "angle": {
+  "text": "Asymmetry: attackers have AI doing the skilled work; big companies with specialist help still have incidents; what about a 30-person business",
+  "approved": {
+   "by": "Brad",
+   "date": "2026-11-17",
+   "evidence": "Brad: 'tighten the narrative arc around asymmetric warfare' and 'Let's try this. Lay it out'"
+  }
+ },
+ "copy": {},
+ "first_comment": {}
 }
