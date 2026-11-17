@@ -55,11 +55,12 @@
    "listing": "https://www.123rf.com/photo_250906483_serious-face-of-manager-focusing-on-mobile-phone-with-colleague-to-check-waiting-on-email-data-at.html",
    "type_label": "Stock Photo",
    "ai_generated": false,
-   "chosen": {
+   "licensed": {
     "by": "Brad",
     "date": "2026-11-17",
-    "evidence": "Brad sent this photo as his pick"
-   }
+    "evidence": "Brad: 'Done. Agreed, that's all three photos' (licensed on his 123RF account)"
+   },
+   "file": "images/123rf-250906483.jpg"
   },
   {
    "slide": 4,
@@ -68,24 +69,27 @@
    "listing": "https://www.123rf.com/photo_190661445_.html",
    "type_label": "Stock Photo",
    "ai_generated": false,
-   "chosen": {
-    "by": "Claude",
+   "licensed": {
+    "by": "Brad",
     "date": "2026-11-17",
-    "evidence": "Proposed for the client-files slide; Brad delegated placement"
-   }
+    "evidence": "Brad: 'Done. Agreed, that's all three photos' (licensed on his 123RF account)"
+   },
+   "file": "images/123rf-190661445.jpg"
   },
   {
    "slide": 5,
    "source": "123rf",
-   "id": "289868609",
-   "listing": "https://www.123rf.com/photo_289868609_.html",
+   "id": "196005612",
+   "listing": "https://www.123rf.com/photo_196005612_.html",
    "type_label": "Stock Photo",
    "ai_generated": false,
-   "chosen": {
+   "licensed": {
     "by": "Brad",
     "date": "2026-11-17",
-    "evidence": "Brad sent this photo as his pick"
-   }
+    "evidence": "Brad: 'Done. Agreed, that's all three photos' (licensed on his 123RF account)"
+   },
+   "file": "images/123rf-196005612.jpg",
+   "note": "Crop out the hill and stadium in the window view (foreign landmarks); darken for the close"
   }
  ],
  "buffer_note": "Buffer draft 6afbdc3d4b26315855c05c4c (made before this gate existed)"

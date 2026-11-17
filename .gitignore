@@ -2,3 +2,4 @@ __pycache__/
 *.pyc
 marketing/linkedin/posts/*/build/
 marketing/linkedin/posts/*/*.pdf
+marketing/linkedin/posts/*/images/
