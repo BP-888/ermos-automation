@@ -63,6 +63,21 @@ Every FAIL must be fixed. Every warning gets a decision.
 3. **Customer Response Test** in the buyer's voice.
 4. Any scoring mandate only if its actual criteria were loaded. Never invent a score.
 
+## Step 3b: first comment (LinkedIn, standing rule, Brad 17 Nov 2026)
+
+Every LinkedIn post carries a first comment, checked like the caption (run Step 2 on it
+too). It passes only if it:
+
+- opens an angle the reader hasn't considered and ends in a genuine, specific question;
+- invites peers to share what works (offer one idea then ask; "if you wrote the rule from
+  scratch"; speak to one role; start from what AI did well and ask about the check);
+- is informative and thought-provoking, never fear-driven, never lecturing ("suck eggs");
+- adds no fact beyond the post's own sources and claims nothing about other firms
+  without evidence;
+- has no engagement bait ("comment below", "agree?", "thoughts?").
+
+Offer Brad two or three options; his pick is approved with the package.
+
 ## Step 4: revise and re-check (at most two loops)
 
 Make the minimum effective edit. Keep Brad's voice, bluntness and strong human lines.

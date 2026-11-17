@@ -41,6 +41,14 @@ Session: "Collateral for Flyers". Presentations get their own later session, "Co
 - marketing-copy-gate not built; marketing-copy skill not validated.
 - Wispr Flow has no meetings recorded since August (voice-of-customer source).
 
+# LinkedIn via Buffer (17 Nov 2026)
+
+- Buffer replaces Metricool. Buffer connector in Claude plus API key (network secret, api.buffer.com) both tested. Org "My organization" 6afb9d9818b2c23d2019163c; channels Brad Pickett profile 6afba076ece6dfde5feecb2b, ERMOS page 6afba076ece6dfde5feecb2c. Free plan: 3 channels, 10 scheduled posts.
+- Rulings today (Decisions Log): posting time = Buffer's recommended slot; Buffer posts from Brad's profile, Brad reposts as ERMOS; published files carry no version names (clean_file.py); every post has an approved first comment, peer-sharing, never fear-driven or lecturing.
+- SOP marketing-linkedin-posts V18 step 7 holds the working Buffer procedure. Known fault: Buffer can reset Document Title to an upload code; re-check before Schedule Post.
+- Post 2 scheduled: Buffer 6afbaa0662442978ea2de174, Wed 18 Nov 2:10pm; repost reminder 2:20pm (scheduled task). Leftover draft 6afba33b797935b975cfa6b6: delete on Brad's yes.
+- Gap: Buffer takes documents only from a public permanent URL, so Brad attaches carousel PDFs by hand until carousels have a public home (proposed: a downloads folder on ermos.com.au, needs Will).
+
 # Agentic Agent System (paused 20 Oct 2026, 7:45pm Sydney)
 
 ## Where we are
