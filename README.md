@@ -2,7 +2,7 @@
 
 Code and config for everything that runs on its own at Ermos. The rules live in Ermos HQ (Notion); this repo holds only what builds and runs them. How anything is built: HQ / 01 Standards / AI Operating System Architecture.
 
-See what's running, and what's waiting on Brad: [Ermos Operating Map](https://claude.ai/artifact/JW9jxTrEA6wdQoSJZxxF9h).
+See what's running, what's broken and what's waiting on Brad: [Everything I Do](https://claude.ai/artifact/961JzTme1pCUR1mJrCjLgc).
 
 ## Where each piece runs
 
@@ -28,6 +28,8 @@ See what's running, and what's waiting on Brad: [Ermos Operating Map](https://cl
 
 ## Skill naming
 
-Every skill name carries its department prefix: `hq-` (coordination and reporting), `leadgen-` (finding raw leads), `enrichment-` (filling out and verifying lead records), `outreach-` (contacting leads).
+Every skill name carries its department prefix: `hq-` (coordination and reporting), `leadgen-` (finding raw leads), `enrichment-` (filling out and verifying lead records), `outreach-` (contacting leads), `marketing-` (marketing copy and content).
 
 `skills/leadgen-google-scraper` scrapes Google Maps listings into a raw CSV via the Apify actor `compass/crawler-google-places`; `scripts/run_wave.sh` runs a capped wave over a locations file. Operating values come from the Notion SOP, which must be `Approved`; the files under `config/` are fallbacks kept in step with it.
+
+`skills/marketing-copy-gate` checks and revises marketing copy before Brad sees it (evaluator-optimizer). `scripts/check_copy.py` runs the mechanical checks (dashes, banned words, required "Resident AI", length, hook); the word lists are passed in from the live Output Language Standard, never stored here. Tests: `python3 -m unittest discover skills/marketing-copy-gate/scripts`.
