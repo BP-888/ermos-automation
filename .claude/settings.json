@@ -19,5 +19,19 @@
       "mcp__Notion__notion-delete-databases",
       "mcp__Notion__notion-delete-comment"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__Buffer__create_post|mcp__Buffer__edit_post|SendUserFile|Artifact|mcp__claude-artifacts__publish_files|mcp__claude-artifacts__publish_version",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/skills/marketing-copy-gate/scripts/post_gate_hook.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
   }
 }

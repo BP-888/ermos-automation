@@ -1,0 +1,14 @@
+{
+  "_note": "Mechanical limits the LinkedIn pre-delivery gate applies. The rules themselves live in Ermos HQ: Output Language Standard (banned and usually-empty words), Claims Register (no-go phrases) and marketing-linkedin-posts (limits, research and visual rules). When HQ changes, change this file to match; do not keep a second copy of a rule anywhere else.",
+  "banned": "delve,foster,leverage,utilise,facilitate,empower,streamline,robust,cutting-edge,paradigm shift,game changer,this is huge,this changes everything,tapestry,realm,beacon,multifaceted,meticulous,intricate,paramount,transformative,elevate,embark,supercharge,harness,ever-evolving,seamless",
+  "empty": "just,literally,honestly,simply,actually,when it comes to,in today's world,let's dive in",
+  "fail_phrases": "safely,never worry,risk-free,zero risk,eliminate the risk,comment below,zero data leakage,ErmosIQ,ERMOS IQ,appliance,nothing leaves your office,learns how your firm works,completely sovereign,unhackable,guaranteed compliance",
+  "warn_phrases": "next post,stay tuned",
+  "require_on_slides": "Resident AI|ResidentAI",
+  "caption_max_chars": 3000,
+  "caption_target_chars": 500,
+  "hook_chars": 210,
+  "image_sources_in_order": ["own", "123rf", "unsplash", "pexels"],
+  "news_and_secondary_domains": ["thenewdaily.com.au", "abc.net.au", "smh.com.au", "theage.com.au", "afr.com", "theaustralian.com.au", "news.com.au", "9news.com.au", "7news.com.au", "sbs.com.au", "theguardian.com", "reuters.com", "bloomberg.com", "linkedin.com", "medium.com", "substack.com", "lawyersweekly.com.au", "itnews.com.au", "crn.com.au", "zdnet.com", "techcrunch.com", "wikipedia.org", "youtube.com", "facebook.com", "x.com", "twitter.com"],
+  "approver": "Brad"
+}

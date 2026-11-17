@@ -1,0 +1,7 @@
+A Victorian lawyer tendered a list of cases to court that had been generated with AI. The citations and summaries were inaccurate. The regulator stopped him running his own practice and put him under two years of supervised practice.
+
+The Federal Court now expects whoever files a document to have checked every authority it cites. More than half of Victorian lawyers surveyed already use AI, mostly general tools.
+
+Two questions every principal should be able to answer: who checks AI work before it's filed, and what client information goes into which tool?
+
+The regulator's statement: lsbc.vic.gov.au/news-updates/news/statement-mr-dayal-matter

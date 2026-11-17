@@ -127,6 +127,30 @@ or website electric blue; it WARNS when no photo is used (Posts 1 and 2 have pho
 on the cover, a middle slide and the close). Every FAIL is fixed; every warning goes to
 Brad as a decision. Show Brad the side-by-side sheet with the draft, every time.
 
+## Step 4d: LinkedIn pre-delivery gate (hard stop, Brad 17 Nov 2026)
+
+"Ready for Brad" for a LinkedIn post means `post_gate.py` reports PASS on all nine items
+(marketing-linkedin-posts step 5c): research rules, topic, angle, copy gate, style,
+images, side by side with Posts 1 and 2, preview formats, clean file. Each item needs
+evidence; none counts as a FAIL.
+
+```
+python3 skills/marketing-copy-gate/scripts/post_gate.py run marketing/linkedin/posts/<post>
+```
+
+The post folder holds `post.json` (topic, angle, sources, approvals with date and Brad's
+words, images with 123RF number, listing, label and licence), `caption.txt` and the
+carousel PDF. Image research uses `rf123_search.js` (search, then `--check` for each
+listing's "Stock Photo" label). The gate writes `build/checklist.md` (paste it at the top
+of every draft shown to Brad), `build/side-by-side.png`, `build/linkedin-preview.png`,
+`build/review.pdf` and `build/team-view.pdf`. If it is BLOCKED, tell Brad what failed and
+why; do not show the draft.
+
+The hook `post_gate_hook.py` (in `.claude/settings.json`) refuses Buffer posts and edits,
+and files sent or published from a post folder, unless that post is PASS and unchanged
+since. After a Buffer post is made from a PASS post, record it:
+`post_gate.py record-buffer <post> <buffer id>`.
+
 ## Step 5: report (the SOP's output contract)
 
 Return, in this order:

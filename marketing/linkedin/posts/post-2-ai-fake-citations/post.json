@@ -1,0 +1,113 @@
+{
+ "post_name": "LinkedIn Page Post 2",
+ "public_title": "AI in legal practice: three questions for your firm",
+ "carousel_pdf": "AI in legal practice - three questions for your firm.pdf",
+ "caption_file": "caption.txt",
+ "checked_on": "2026-11-17",
+ "run_log": "https://app.notion.com/p/41a77626a809814f95ccd89ac3257757",
+ "research": {
+  "sources": [
+   {
+    "title": "Generative Artificial Intelligence Practice Note (GPN-AI)",
+    "publisher": "Federal Court of Australia",
+    "date": "2026-04-16",
+    "url": "https://www.fedcourt.gov.au/law-and-practice/practice-documents/practice-notes/gpn-ai",
+    "verified_point": "The person responsible for a document confirms the authorities it cites exist and support the proposition",
+    "where": "para 4.5 (and para 2.3)"
+   },
+   {
+    "title": "Statement on the Mr Dayal matter",
+    "publisher": "Victorian Legal Services Board + Commissioner",
+    "date": "2025-09-02",
+    "url": "https://lsbc.vic.gov.au/news-updates/news/statement-mr-dayal-matter",
+    "verified_point": "Practising certificate varied: no principal practice, two years of supervised legal practice, after tendering AI-generated inaccurate citations",
+    "where": "statement body"
+   },
+   {
+    "title": "AI use by Victorian lawyers surges (Lawyer census release)",
+    "publisher": "Victorian Legal Services Board + Commissioner",
+    "date": "2026-10-30",
+    "url": "https://lsbc.vic.gov.au/news-updates/news/ai-use-victorian-lawyers-surges-benefits-clients-remain-uneven",
+    "verified_point": "55% of Victorian lawyers surveyed use AI; most use general tools",
+    "where": "release body"
+   }
+  ],
+  "allow_previous_year": {
+   "by": "Brad",
+   "date": "2026-11-16",
+   "evidence": "Approved the final Post 2 package V6, which quotes the 2 Sep 2025 VLSB+C statement as the case it is built on (before the 17 Nov 2026 rule that 2025 sources need a separate yes)"
+  }
+ },
+ "topic": {
+  "text": "AI-generated fake citations in a Victorian court matter, and what it means for principals",
+  "approved": {
+   "by": "Brad",
+   "date": "2026-11-16",
+   "evidence": "Post 2 topic chosen by Brad for the series (Run Log RUN-206)"
+  }
+ },
+ "angle": {
+  "text": "Case-led: the regulator's response, the Federal Court's expectation, then two questions every principal should be able to answer",
+  "approved": {
+   "by": "Brad",
+   "date": "2026-11-16",
+   "evidence": "Case-led angle approved with the V6 package; Post 2 named the case-led benchmark in Style Guide 5A"
+  }
+ },
+ "copy": {
+  "approved": {
+   "by": "Brad",
+   "date": "2026-11-16",
+   "evidence": "Final package V6 approved: caption V6 (647 characters) and carousel V6 (Run Log RUN-206)"
+  }
+ },
+ "first_comment": {
+  "text": "More than half of Victorian lawyers surveyed already use AI in practice. If you were writing your firm's AI rules from scratch tomorrow, what would be the first line?",
+  "approved": {
+   "by": "Brad",
+   "date": "2026-11-17",
+   "evidence": "Option 2 chosen by Brad in Claude Code (Run Log RUN-206)"
+  }
+ },
+ "images": [
+  {
+   "slide": 1,
+   "source": "123rf",
+   "id": "318126537",
+   "listing": "https://www.123rf.com/photo_318126537_digital-technology-background.html",
+   "type_label": "Stock Photo",
+   "ai_generated": false,
+   "licensed": {
+    "by": "Brad",
+    "date": "2026-11-16",
+    "evidence": "Licensed on Brad's 123RF account, standard licence"
+   }
+  },
+  {
+   "slide": 4,
+   "source": "123rf",
+   "id": "239269922",
+   "listing": "https://www.123rf.com/photo_239269922_blurred-background-of-modern-office-room-with-panoramic-window-and-city-view.html",
+   "type_label": "Stock Photo",
+   "ai_generated": false,
+   "licensed": {
+    "by": "Brad",
+    "date": "2026-11-16",
+    "evidence": "Licensed on Brad's 123RF account, standard licence"
+   }
+  },
+  {
+   "slide": 5,
+   "source": "123rf",
+   "id": "239269922",
+   "listing": "https://www.123rf.com/photo_239269922_blurred-background-of-modern-office-room-with-panoramic-window-and-city-view.html",
+   "type_label": "Stock Photo",
+   "ai_generated": false,
+   "licensed": {
+    "by": "Brad",
+    "date": "2026-11-16",
+    "evidence": "Same licensed image, darkened for the close"
+   }
+  }
+ ]
+}
