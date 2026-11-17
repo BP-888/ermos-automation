@@ -99,6 +99,7 @@ async function check(outdir, ids) {
               type_label: label,
               stock_photo: label === 'Stock Photo',
               ai_generated: /ai[- ]generated|generated with ai/i.test(label),
+              editorial_only: lines.some(l => /for editorial use only/i.test(l)),
               render_or_ai_keywords: keywords.filter(w => /^(3d|render|rendering|illustration|ai|generative|generated|cgi)$/i.test(w)),
               largest_size: sizes[sizes.length - 1] || ''});
     await p.close();

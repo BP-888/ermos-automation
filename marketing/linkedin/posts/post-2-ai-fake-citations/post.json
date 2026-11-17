@@ -81,7 +81,8 @@
     "by": "Brad",
     "date": "2026-11-16",
     "evidence": "Licensed on Brad's 123RF account, standard licence"
-   }
+   },
+   "editorial_only": false
   },
   {
    "slide": 4,
@@ -94,7 +95,8 @@
     "by": "Brad",
     "date": "2026-11-16",
     "evidence": "Licensed on Brad's 123RF account, standard licence"
-   }
+   },
+   "editorial_only": false
   },
   {
    "slide": 5,
@@ -107,7 +109,8 @@
     "by": "Brad",
     "date": "2026-11-16",
     "evidence": "Same licensed image, darkened for the close"
-   }
+   },
+   "editorial_only": false
   }
  ]
 }

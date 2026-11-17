@@ -65,7 +65,8 @@
     "date": "2026-11-17",
     "evidence": "Brad: 'Done. Agreed, that's all three photos' (licensed on his 123RF account)"
    },
-   "file": "images/123rf-250906483.jpg"
+   "file": "images/123rf-250906483.jpg",
+   "editorial_only": false
   },
   {
    "slide": 4,
@@ -79,7 +80,8 @@
     "date": "2026-11-17",
     "evidence": "Brad: 'Done. Agreed, that's all three photos' (licensed on his 123RF account)"
    },
-   "file": "images/123rf-190661445.jpg"
+   "file": "images/123rf-190661445.jpg",
+   "editorial_only": false
   },
   {
    "slide": 5,
@@ -94,7 +96,8 @@
     "evidence": "Brad: 'Done. Agreed, that's all three photos' (licensed on his 123RF account)"
    },
    "file": "images/123rf-196005612.jpg",
-   "note": "Crop out the hill and stadium in the window view (foreign landmarks); darken for the close"
+   "note": "Crop out the hill and stadium in the window view (foreign landmarks); darken for the close",
+   "editorial_only": false
   }
  ],
  "buffer_note": "Buffer draft 6afbdc3d4b26315855c05c4c (made before this gate existed)"

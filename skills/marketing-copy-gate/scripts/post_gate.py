@@ -230,6 +230,9 @@ def step_images(m, visual):
                 problems.append(f"{tag}: 123RF {im.get('id')} label is '{im.get('type_label')}', not 'Stock Photo'")
             if im.get("ai_generated"):
                 problems.append(f"{tag}: 123RF {im.get('id')} is AI-generated")
+            if im.get("editorial_only") is not False:
+                problems.append(f"{tag}: 123RF {im.get('id')} is not confirmed free of 'For Editorial Use Only' "
+                                "(editorial images cannot be used in promotional posts)")
         if src in ("unsplash", "pexels") and not im.get("why_not_123rf"):
             problems.append(f"{tag}: {src} used without noting why no 123RF image fitted (SOP order)")
         ok, a = approval(im.get("licensed"), f"licence for {tag}")
