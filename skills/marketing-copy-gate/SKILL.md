@@ -55,6 +55,19 @@ from the SOP as it stands today, not from this example.
 
 Every FAIL must be fixed. Every warning gets a decision.
 
+## Step 2b: sources must be current (standing rule, Brad 17 Nov 2026)
+
+AI moves fast. Every source the copy quotes must be from the current year (or the last
+12 months). The previous year is used only when no current source exists and Brad says
+yes; older sources are never quoted. Search for the newest primary source first.
+
+```
+python3 skills/marketing-copy-gate/scripts/check_sources.py sources.json [--allow-previous-year]
+```
+
+`sources.json` is the run state's source list (title, publisher, date, url). Any FAIL
+blocks the draft.
+
 ## Step 3: judgement checks (Claude), in the SOP's order
 
 1. **Output Language Standard**: portability, show and voice tests; the 18 patterns.
