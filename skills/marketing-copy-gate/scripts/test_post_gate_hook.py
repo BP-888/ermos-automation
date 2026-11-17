@@ -75,6 +75,11 @@ class HookTest(unittest.TestCase):
         json.dump({"buffer_post_ids": ["abc"]}, open(os.path.join(self.d, "buffer.json"), "w"))
         self.assertEqual(self.call("mcp__Buffer__edit_post", {"postId": "abc", "dueAt": "x"}), "ALLOW")
 
+    def test_preview_shows_files_but_never_reaches_buffer(self):
+        self.write_checklist("PREVIEW")
+        self.assertEqual(self.call("SendUserFile", {"files": [os.path.join(self.d, "build", "review.pdf")]}), "ALLOW")
+        self.assertIn("PREVIEW", self.call("mcp__Buffer__create_post", {"text": CAPTION}))
+
     def test_unrelated_calls_pass_through(self):
         self.assertEqual(self.call("SendUserFile", {"files": ["/tmp/other.png"]}), "ALLOW")
         self.assertEqual(self.call("Bash", {"command": "ls"}), "ALLOW")

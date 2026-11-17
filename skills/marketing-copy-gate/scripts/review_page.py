@@ -31,8 +31,9 @@ def uri(p, maxw=1100, q=82):
 
 def build(d, slot):
     c = json.load(open(os.path.join(d, "build", "checklist.json")))
-    if c["status"] != "PASS":
+    if c["status"] not in ("PASS", "PREVIEW"):
         sys.exit("checklist is not PASS: the review page is only built for a post that passed")
+    preview = c["status"] == "PREVIEW"
     m = json.load(open(os.path.join(d, "post.json")))
     b = os.path.join(d, "build")
     for f in glob.glob(os.path.join(b, "tv-*.png")):
@@ -41,12 +42,12 @@ def build(d, slot):
     slides = sorted(glob.glob(os.path.join(b, "slides", "s*.png")))
     rows = "".join(
         f'<tr><td class="n">{i["n"]}</td><td>{i["step"]}</td><td><span class="pill {i["status"].lower()}">'
-        f'{"✓ " if i["status"] == "PASS" else ""}{i["status"]}</span></td><td>{html.escape(i["evidence"][:260])}</td></tr>'
+        f'{"✓ " if i["status"] == "PASS" else "⚠ " if i["status"] == "WAIVED" else ""}{i["status"]}</span></td><td>{html.escape(i["evidence"][:260])}</td></tr>'
         for i in c["items"])
     grid = "".join(f'<figure><img src="{uri(s, 700)}" alt="Slide {k + 1}"><figcaption>Slide {k + 1}</figcaption></figure>'
                    for k, s in enumerate(slides))
     cap = html.escape(open(os.path.join(d, m.get("caption_file", "caption.txt"))).read().strip()).replace("\n", "<br>")
-    fc = html.escape(m["first_comment"]["text"])
+    fc = html.escape((m.get("first_comment") or {}).get("text") or "Not chosen yet (waived for this preview).")
     title = html.escape(m["public_title"])
     page = f'''<title>{html.escape(m.get("review_title", "LinkedIn Post Review"))}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -64,7 +65,7 @@ h1{{font:600 clamp(26px,4vw,36px)/1.15 Sora,system-ui,sans-serif;margin:8px 0;te
 .tw{{overflow-x:auto}}table{{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}}
 th{{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--rule);padding:8px}}
 td{{border-bottom:1px solid var(--rule);padding:8px;vertical-align:top}}td.n{{color:var(--muted);font-variant-numeric:tabular-nums}}
-.pill{{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}}.pill.pass{{color:var(--teal)}}.pill.fail{{color:var(--coral)}}
+.pill{{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}}.pill.pass{{color:var(--teal)}}.pill.fail,.pill.waived{{color:var(--coral)}}
 .status{{font:600 18px Sora,system-ui,sans-serif;color:var(--teal)}}
 .li{{background:#fff;color:#191919;border:1px solid #ddd;border-radius:8px;max-width:560px;padding:14px 0}}
 .li .hd{{display:flex;gap:10px;align-items:center;padding:0 14px 10px}}.av{{width:44px;height:44px;border-radius:50%;background:#151B2B;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600}}
@@ -76,7 +77,7 @@ ol{{margin:0;padding-left:22px;display:grid;gap:6px}}
 </style>
 <main>
 <div><div class="wm">ERMOS</div><h1>{html.escape(m.get("post_name", "LinkedIn post"))}: ready for your approval</h1><p class="muted" style="margin:0;max-width:65ch">Set for {html.escape(slot)} on your profile through Buffer. Nothing has been scheduled.</p></div>
-<section class="card"><h2>Pre-delivery checklist</h2><p class="status">PASS: 9 of 9 <span class="muted" style="font:400 14px Inter,system-ui,sans-serif">(checked {c["checked_at"].replace("T", " ")})</span></p><div class="tw"><table><thead><tr><th>#</th><th>Step</th><th>Result</th><th>Evidence</th></tr></thead><tbody>{rows}</tbody></table></div></section>
+<section class="card"><h2>Pre-delivery checklist</h2><p class="status"{' style="color:var(--coral)"' if preview else ''}>{"PREVIEW ONLY: " + str(sum(i["status"]=="PASS" for i in c["items"])) + " of 9 pass; waived items below. Not cleared for Buffer." if preview else "PASS: 9 of 9"} <span class="muted" style="font:400 14px Inter,system-ui,sans-serif">(checked {c["checked_at"].replace("T", " ")})</span></p><div class="tw"><table><thead><tr><th>#</th><th>Step</th><th>Result</th><th>Evidence</th></tr></thead><tbody>{rows}</tbody></table></div></section>
 <section><h2>How it looks on LinkedIn</h2><div class="li"><div class="hd"><div class="av">BP</div><div><b style="font-size:14px">Brad Pickett</b><div style="font-size:12px;color:#666">Founder, ERMOS</div></div></div><div class="cap">{cap}</div><div class="bar">{title} · {len(slides)} pages</div><img src="{uri(slides[0], 900)}" alt="Slide 1"><div class="fc"><b>First comment</b><br>{fc}</div></div></section>
 <section><h2>All {len(slides)} slides</h2><div class="grid">{grid}</div></section>
 <section class="wide"><h2>Side by side with Posts 1 and 2</h2><img src="{uri(os.path.join(b, "side-by-side.png"), 1400)}" alt="Post 1 and Post 2 above, this post below"></section>

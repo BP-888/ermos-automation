@@ -86,5 +86,13 @@
    "evidence": "Brad: 'This is approved' (slides 1 to 4 as on the partners' page; slide 5 revised by Brad to the IP question and 'Resident AI. Secured onshore. | ermos.com.au'; caption as presented); closing sign-off enlarged to 'ERMOS | Resident AI / Secured onshore.' at Brad's request"
   }
  },
- "first_comment": {}
+ "first_comment": {},
+ "preview_waivers": [
+  {
+   "step": "Copy gate",
+   "by": "Brad",
+   "date": "2026-11-17",
+   "evidence": "Brad: 'let this one through as a test' (first comment not yet chosen; preview only, not for Buffer)"
+  }
+ ]
 }

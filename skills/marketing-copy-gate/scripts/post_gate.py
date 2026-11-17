@@ -363,7 +363,21 @@ def run(d):
     else:
         for s in STEPS[4:]:
             items[s] = item("FAIL", "", ["no carousel PDF"])
-    status = "PASS" if all(items[s]["status"] == "PASS" for s in STEPS) else "BLOCKED"
+    # Preview waiver (Brad, 17 Nov 2026): Brad may let a draft through for viewing only, with
+    # a dated record naming the step. A waived item shows as WAIVED, the status becomes
+    # PREVIEW, and the hook still refuses Buffer until every item truly passes.
+    for w in m.get("preview_waivers") or []:
+        ok, ev = approval(w, f"preview waiver for {w.get('step')}")
+        it = items.get(w.get("step"))
+        if ok and it and it["status"] == "FAIL":
+            it["status"] = "WAIVED"
+            it["notes"].append(f"Preview only, waived by {ev}")
+    if all(items[s]["status"] == "PASS" for s in STEPS):
+        status = "PASS"
+    elif all(items[s]["status"] in ("PASS", "WAIVED") for s in STEPS):
+        status = "PREVIEW"
+    else:
+        status = "BLOCKED"
     cap = open(os.path.join(d, m.get("caption_file", "caption.txt"))).read() if os.path.exists(os.path.join(d, m.get("caption_file", "caption.txt"))) else ""
     result = {
         "post": m.get("post_name"), "public_title": m.get("public_title"), "status": status,
@@ -385,7 +399,7 @@ def run(d):
 
 
 def markdown(r):
-    tick = {"PASS": "✅", "FAIL": "❌"}
+    tick = {"PASS": "✅", "FAIL": "❌", "WAIVED": "⚠️"}
     lines = [f"**Pre-delivery checklist: {r['post']}: {r['status']}** (checked {r['checked_at']})", "",
              "| # | Step | Result | Evidence |", "|---|---|---|---|"]
     for it in r["items"]:

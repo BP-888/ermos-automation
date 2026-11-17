@@ -50,12 +50,15 @@ def posts():
         yield d, m, c
 
 
-def verdict(d, m, c):
-    """(ok, reason) for one post: PASS and nothing changed since the check."""
+def verdict(d, m, c, allow_preview=False):
+    """(ok, reason) for one post: PASS (or, for viewing only, PREVIEW) and nothing changed since."""
     label = m.get("post_name") or os.path.basename(d)
     if not c:
         return False, f"{label} has never been through the pre-delivery gate (run post_gate.py run {d})"
-    if c.get("status") != "PASS":
+    if c.get("status") == "PREVIEW" and not allow_preview:
+        return False, (f"{label} is a PREVIEW: Brad waived an item for viewing only. It cannot go into Buffer "
+                       "until every item passes")
+    if c.get("status") not in (("PASS", "PREVIEW") if allow_preview else ("PASS",)):
         failed = [f"{i['n']} {i['step']}: {'; '.join(i['problems']) or 'no evidence'}" for i in c["items"] if i["status"] != "PASS"]
         return False, f"{label} is BLOCKED by the pre-delivery gate. Failed: " + " | ".join(failed)
     f = c.get("fingerprints", {})
@@ -138,7 +141,7 @@ def main():
                 inside = ap.startswith(d + os.sep)
                 named = m.get("carousel_pdf") and base == os.path.basename(m["carousel_pdf"])
                 if inside or named:
-                    ok, why = verdict(d, m, c)
+                    ok, why = verdict(d, m, c, allow_preview=True)
                     if not ok:
                         return deny(f"{base}: {why}")
         return 0
