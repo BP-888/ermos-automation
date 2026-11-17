@@ -34,3 +34,4 @@ A workflow is not finished until it:
 
 That is what puts it on the dashboard live. Until all three hold, report it as built, not done. The Decisions Log page is the master; change this section only when that ruling changes.
 - Brad is not technical: explain outcomes in plain English and decide technical details yourself.
+- **What needs Brad's yes (Brad, 17 Nov 2026).** Ask only for top-level ideas, a new workflow or concept, and the rulings each one needs. The implementation steps that carry out an approved idea (Notion records and schema, n8n builds and tests, dashboard changes, repo commits) are approved in advance: do them without asking. Still always ask before anything another person reads is sent, before credits are spent, and before anything is deleted.
