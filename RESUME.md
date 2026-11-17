@@ -49,6 +49,8 @@ Session: "Collateral for Flyers". Presentations get their own later session, "Co
 - Post 2 scheduled: Buffer 6afbaa0662442978ea2de174, Wed 18 Nov 2:10pm; repost reminder 2:20pm (scheduled task). Leftover draft 6afba33b797935b975cfa6b6: delete on Brad's yes.
 - Concept Bank (HQ, 30 concepts, six industries) loaded as Draft; Post 3 (Gen Z financial advice) parked by Brad.
 - Coles cyber incident post (approved version B, first comment 2): separate Buffer draft 6afbdc3d4b26315855c05c4c, Thu 19 Nov 3:42pm. Brad attaches "When big companies have cyber incidents, what protects your practice.pdf" and schedules. Facts re-check reminder 9am Thu (trig_01BMDKYSy5fHBQ3YEy7uZRuh).
+- Pre-delivery gate (17 Nov 2026): skills/marketing-copy-gate/scripts/post_gate.py runs the nine-item checklist per post folder (marketing/linkedin/posts/<post>/post.json); post_gate_hook.py in .claude/settings.json blocks Buffer and file sends unless PASS (PREVIEW waiver = view only). review_page.py builds the approval page; rf123_search.js searches 123RF and reads Stock Photo / editorial labels. SOP marketing-linkedin-posts V25.
+- Posts: post-2 PASS (scheduled Wed 18 Nov 2:10pm). coles-cyber-incident PASS (unnamed supermarket version, review page https://claude.ai/artifact/9UnmSNiukBZMc4CfWAGdvv). ai-threat-carousel PREVIEW: needs first comment pick + partners' sign-off (partners page https://claude.ai/artifact/B1HdjEzUtFcSBvCFk99hoe). Resume with Brad Wed 18 Nov 9:30am (scheduled reminder).
 - Gap: Buffer takes documents only from a public permanent URL, so Brad attaches carousel PDFs by hand until carousels have a public home (proposed: a downloads folder on ermos.com.au, needs Will).
 
 # Agentic Agent System (paused 20 Oct 2026, 7:45pm Sydney)
