@@ -312,15 +312,46 @@ section{width:1600px;height:1000px;background:#fff;page-break-after:always;paddi
     pages += [f'<section style="justify-content:center"><img class="big" src="{rel(s)}"></section>' for s in slides]
     with open(os.path.join(build, "review.html"), "w") as fh:
         fh.write(f"<!doctype html><meta charset=utf-8>{css}<body style='background:#fff'>{''.join(pages)}</body>")
-    team = (f'<section style="flex-direction:column;gap:0"><h1>{html.escape(name)} ERMOS Carousel</h1>'
-            f'<div class="cap" style="font-size:16px;padding:0;max-width:1500px">{esc(caption)}</div>'
-            f'<div class="strip">{"".join(f"<img src={chr(34)}{rel(s)}{chr(34)}>" for s in slides[:5])}</div></section>')
+    # Team view (SOP 5b; Brad, 17 Nov 2026: "make it look real"): the post as it appears in
+    # the LinkedIn feed (profile line, full caption, the document with slide 1 and its title,
+    # the action bar), then every slide across the bottom. No made-up likes or comments.
+    icon = lambda d: f'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{d}</svg>'
+    actions = [("Like", '<path d="M7 11v9H4v-9h3zm0 0 4-7a2 2 0 0 1 3 2l-1 4h5a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 16.8 20H7"/>'),
+               ("Comment", '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>'),
+               ("Repost", '<path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/>'),
+               ("Send", '<path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/>')]
+    bar = "".join(f'<span style="display:flex;align-items:center;gap:6px;font-weight:600;font-size:14px;color:#666">{icon(p)}{t}</span>' for t, p in actions)
+    globe = icon('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>').replace('width="20" height="20"', 'width="12" height="12"')
+    li = (f'<div style="background:#fff;border:1px solid #DFDEDA;border-radius:8px;width:560px;font-family:-apple-system,system-ui,Inter,sans-serif;color:rgba(0,0,0,.9);zoom:1.3">'
+          f'<div style="display:flex;gap:8px;padding:12px 16px 0"><div style="width:48px;height:48px;border-radius:50%;background:#151B2B;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:18px">BP</div>'
+          f'<div style="line-height:1.35"><div style="font-weight:600;font-size:14px">Brad Pickett</div><div style="font-size:12px;color:#666">Founder, ERMOS</div>'
+          f'<div style="font-size:12px;color:#666;display:flex;gap:4px;align-items:center">Now &middot; {globe}</div></div></div>'
+          f'<div style="font-size:14px;line-height:20px;padding:8px 16px 12px">{esc(caption)}</div>'
+          f'<div style="border-top:1px solid #eee"><div style="font-size:12px;font-weight:600;padding:8px 16px;color:#191919">{html.escape(title)} &middot; {len(slides)} pages</div>'
+          f'<img src="{rel(slides[0])}" style="width:100%;display:block"></div>'
+          f'<div style="display:flex;justify-content:space-around;padding:10px 8px;border-top:1px solid #eee">{bar}</div></div>')
+    team = (f'<section style="flex-direction:column;align-items:center;gap:28px;height:auto;min-height:0;padding:40px 44px;background:#F4F2EE">'
+            f'<div style="width:100%;display:flex;justify-content:space-between;align-items:center">'
+            f'<div style="display:flex;align-items:center;gap:16px"><span style="font-family:Sora;font-weight:600;letter-spacing:.42em;font-size:18px">ERMOS</span>'
+            f'<span style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#2F8A80;padding-left:16px;border-left:1px solid #ccc">Resident AI</span></div>'
+            f'<span style="font-size:15px;color:#5A5F6B">{html.escape(name)} ERMOS Carousel</span></div>'
+            f'{li}'
+            f'<div style="width:100%"><div style="font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5A5F6B;margin-bottom:12px">All {len(slides)} slides</div>'
+            f'<div style="display:grid;grid-template-columns:repeat({min(len(slides), 5)},1fr);gap:16px">'
+            f'{"".join(f"<img style={chr(34)}width:100%;border:1px solid #DFDEDA;display:block{chr(34)} src={chr(34)}{rel(s)}{chr(34)}>" for s in slides[:5])}'
+            f'</div></div></section>')
     with open(os.path.join(build, "team-view.html"), "w") as fh:
         fh.write(f"<!doctype html><meta charset=utf-8>{css}<body style='background:#fff'>{team}</body>")
     r = lambda a: subprocess.run(["node", os.path.join(HERE, "render_html.js")] + a, capture_output=True, text=True)
     r([os.path.join(build, "linkedin-preview.html"), out["linkedin_preview"], "640"])
     r([os.path.join(build, "review.html"), out["review_pdf"], "1600", "1000"])
-    r([os.path.join(build, "team-view.html"), out["team_view"], "1600", "1000"])
+    # size the team view page to its content so the slides are not left in empty space
+    tv = subprocess.run(["node", "-e", "const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();"
+                         "const p=await b.newPage({viewport:{width:1600,height:900}});await p.goto('file://'+process.argv[1],"
+                         "{waitUntil:'networkidle'});console.log(await p.evaluate(()=>document.querySelector('section').scrollHeight));"
+                         "await b.close();})()", os.path.abspath(os.path.join(build, "team-view.html"))],
+                        capture_output=True, text=True, cwd=HERE).stdout.strip()
+    r([os.path.join(build, "team-view.html"), out["team_view"], "1600", str(int(tv) + 2 if tv.isdigit() else 1000)])
     missing = [k for k, p in out.items() if not os.path.exists(p) or os.path.getsize(p) < 1000]
     return item("FAIL" if missing else "PASS",
                 "build/linkedin-preview.png, build/review.pdf (checklist then slides), build/team-view.pdf",
