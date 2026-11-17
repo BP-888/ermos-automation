@@ -59,10 +59,15 @@ def page_facts(png):
     paper_top = sum(near(p, PAPER, 10) for p in top) / len(top)
     blue = sum(any(near(p, b, 28) for b in BLUES) for p in px) / len(px)
     teal = sum(near(p, TEAL, 40) for p in px)
-    # a photo shows as many distinct, non-paper colours
-    distinct = len({(r // 8, g // 8, b // 8) for r, g, b in px if not near((r, g, b), PAPER, 10)})
+    # A photo shows as many distinct colours once text is filtered out (a median filter
+    # wipes thin glyph strokes). Calibrated 17 Nov 2026: photo slides 682+, type-only
+    # slides 215 or fewer, across Post 2, the Coles post and the first navy draft.
+    from PIL import ImageFilter
+    fp = im.filter(ImageFilter.MedianFilter(7))
+    fpx = list(fp.get_flattened_data()) if hasattr(fp, "get_flattened_data") else list(fp.getdata())
+    distinct = len({(r // 4, g // 4, b // 4) for r, g, b in fpx})
     return {"paper_top": round(paper_top, 2), "blue": round(blue, 4), "teal": teal,
-            "photo": distinct > 300}
+            "photo": distinct > 400, "photo_signal": distinct}
 
 
 def fonts(pdf):

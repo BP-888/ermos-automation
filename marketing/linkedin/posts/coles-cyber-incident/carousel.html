@@ -1,53 +1,64 @@
 <!doctype html><html lang="en-AU"><head><meta charset="utf-8">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600&family=Inter:wght@400;500;600&display=swap">
 <style>
-:root{--paper:#EFEEEA;--ink:#151B2B;--teal:#2F8A80;--muted:#5A5F6B;--rule:#CFCDC6}
+/* Layout follows Posts 1 and 2: paper slides, strong headline at the top, photo band at the foot; dark photo close */
+:root{--paper:#EFEEEA;--ink:#151B2B;--teal:#2F8A80;--muted:#5A5F6B;--rule:#CFCDC6;--white:#F2F5F9}
 @page{size:1080px 1350px;margin:0}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Inter,system-ui,sans-serif;color:var(--ink)}
-.s{width:1080px;height:1350px;padding:84px 72px 80px;display:flex;flex-direction:column;background:var(--paper);page-break-after:always}
+.s{width:1080px;height:1350px;display:flex;flex-direction:column;background:var(--paper);page-break-after:always;position:relative;overflow:hidden}
+.in{padding:84px 72px 0;display:flex;flex-direction:column}
 .top{display:flex;justify-content:space-between;align-items:center}
 .wm{font-family:Sora;font-weight:600;letter-spacing:.42em;font-size:28px}
-.pg{font-size:22px;font-weight:500;letter-spacing:.14em}
-.body{flex:1;display:flex;flex-direction:column;justify-content:center}
-.lab{font-size:24px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:28px}
-h1{font-family:Sora;font-weight:600;font-size:92px;line-height:1.08;letter-spacing:-.015em}
-h2{font-family:Sora;font-weight:500;font-size:64px;line-height:1.15;letter-spacing:-.01em}
-p.lead{font-family:Sora;font-weight:500;font-size:46px;line-height:1.25;margin-top:44px}
-.src{font-size:22px;font-weight:600;letter-spacing:.12em;margin-top:40px;color:var(--muted)}
+.pg{font-size:22px;font-weight:500;letter-spacing:.14em;color:var(--muted)}
+.lab{font-size:24px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin:56px 0 22px}
+h1{font-family:Sora;font-weight:600;font-size:84px;line-height:1.06;letter-spacing:-.015em}
+h2{font-family:Sora;font-weight:500;font-size:60px;line-height:1.15;letter-spacing:-.01em}
+.lead{font-family:Sora;font-weight:500;font-size:42px;line-height:1.22;margin-top:30px}
+.src{font-size:22px;font-weight:600;letter-spacing:.12em;margin-top:26px;color:var(--muted)}
 .teal{color:var(--teal)}
-ol{list-style:none;margin-top:52px}
-li{display:flex;gap:30px;align-items:baseline;font-size:44px;line-height:1.3;padding:34px 0;border-top:1px solid var(--rule)}
-li:last-child{border-bottom:1px solid var(--rule)}
+.band{margin-top:auto;height:560px;width:100%;object-fit:cover;display:block}
+.mid{flex:1;justify-content:center;padding-bottom:84px}
+/* close */
+.dark{background:#151B2B;color:var(--white)}
+.dark .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dark .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,27,43,.80) 0%,rgba(21,27,43,.58) 55%,rgba(21,27,43,.86) 100%)}
+.dark .in{position:relative;height:100%;padding-bottom:80px}
+.dark .pg{color:#ADB7C6}
+ol{list-style:none;margin-top:44px}
+li{display:flex;gap:30px;align-items:baseline;font-size:42px;line-height:1.3;padding:30px 0;border-top:1px solid rgba(242,245,249,.28)}
+li:last-child{border-bottom:1px solid rgba(242,245,249,.28)}
 li span{font-family:Sora;font-weight:600;min-width:36px}
-.foot{display:flex;justify-content:space-between;font-family:Sora;font-size:34px;font-weight:600}
-.foot .u{font-family:Inter;color:var(--muted);font-weight:500}
+.foot{margin-top:auto;display:flex;justify-content:space-between;font-family:Sora;font-size:32px;font-weight:600}
+.foot .u{font-family:Inter;color:#ADB7C6;font-weight:500}
 </style></head><body>
 
-<section class="s"><div class="top"><div class="wm">ERMOS</div><div class="pg">SWIPE &rarr;</div></div>
-<div class="body"><div class="lab">This week</div>
+<section class="s"><div class="in"><div class="top"><div class="wm">ERMOS</div><div class="pg">SWIPE &rarr;</div></div>
+<div class="lab">This week</div>
 <h1>Coles is investigating a cyber security incident.</h1>
 <p class="lead">It has called in the Australian Cyber Security Centre and global experts.</p>
-<div class="src">COLES GROUP, 16 NOV 2026</div></div></section>
+<div class="src">COLES GROUP, 16 NOV 2026</div></div>
+<img class="band" src="images/crop-cover.jpg" alt=""></section>
 
-<section class="s"><div class="top"><div class="wm">ERMOS</div><div class="pg">2 / 5</div></div>
-<div class="body">
+<section class="s"><div class="in mid"><div class="top" style="position:absolute;top:84px;left:72px;right:72px"><div class="wm">ERMOS</div><div class="pg">2 / 5</div></div>
 <h1>&ldquo;A time of increasing cyber incidents in Australia and around the world.&rdquo;</h1>
 <div class="src">COLES GROUP, 16 NOV 2026</div></div></section>
 
-<section class="s"><div class="top"><div class="wm">ERMOS</div><div class="pg">3 / 5</div></div>
-<div class="body"><h2>Big companies put serious money and whole teams into protecting their customers&rsquo; data.</h2>
+<section class="s"><div class="in mid"><div class="top" style="position:absolute;top:84px;left:72px;right:72px"><div class="wm">ERMOS</div><div class="pg">3 / 5</div></div>
+<h2>Big companies put serious money and whole teams into protecting their customers&rsquo; data.</h2>
 <h1 style="margin-top:56px">Incidents still happen.</h1>
-<h1 class="teal" style="margin-top:20px">What is protecting yours?</h1></div></section>
+<h1 class="teal" style="margin-top:16px">What is protecting yours?</h1></div></section>
 
-<section class="s"><div class="top"><div class="wm">ERMOS</div><div class="pg">4 / 5</div></div>
-<div class="body"><h1>Client files.<br>Precedents.<br><span style="white-space:nowrap">Know-how</span>.</h1>
-<p class="lead">It is the most valuable thing your practice owns, and it never shows up on the balance sheet.</p></div></section>
+<section class="s"><div class="in"><div class="top"><div class="wm">ERMOS</div><div class="pg">4 / 5</div></div>
+<h1 style="margin-top:64px">Client files.<br>Precedents.<br><span style="white-space:nowrap">Know-how.</span></h1>
+<p class="lead">It is the most valuable thing your practice owns, and it never shows up on the balance sheet.</p></div>
+<img class="band" src="images/crop-files.jpg" alt=""></section>
 
-<section class="s"><div class="top"><div class="wm">ERMOS</div><div class="pg">5 / 5</div></div>
-<div class="body"><h2 style="font-weight:600">Three questions for your next partners&rsquo; meeting</h2>
+<section class="s dark"><img class="bg" src="images/crop-close.jpg" alt=""><div class="shade"></div>
+<div class="in"><div class="top"><div class="wm">ERMOS</div><div class="pg">5 / 5</div></div>
+<h2 style="font-weight:600;margin-top:72px">Three questions for your next partners&rsquo; meeting</h2>
 <ol><li><span>1</span>Where does our client knowledge live today?</li>
 <li><span>2</span>Who outside the firm can reach it?</li>
-<li><span>3</span>If our systems went offline tomorrow, what could we still do?</li></ol></div>
-<div class="foot"><div>Resident AI, secured onshore.</div><div class="u">ermos.com.au</div></div></section>
+<li><span>3</span>If our systems went offline tomorrow, what could we still do?</li></ol>
+<div class="foot"><div>Resident AI, secured onshore.</div><div class="u">ermos.com.au</div></div></div></section>
 </body></html>
