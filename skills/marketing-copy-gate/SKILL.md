@@ -112,6 +112,21 @@ numbers (V4, V6), draft, template, final, master, REF_/MOOD_/AVOID_ prefixes and
 names (Chrome, Skia, Canva, Ideogram) in the file name or hidden properties. Publish
 only the cleaned copy. `clean_file.py check <file>` checks a file without changing it.
 
+## Step 4c: visual check for carousels (standing rule, Brad 17 Nov 2026)
+
+The LinkedIn look is set by Posts 1 and 2 (marketing-linkedin-posts step 5b), not by the
+website palette in the general brand guide. Before Brad sees any carousel:
+
+```
+python3 skills/marketing-copy-gate/scripts/check_visual.py <file.pdf> --sheet <compare.png>
+```
+
+It compares the draft with `benchmarks/linkedin-post-2.pdf` and FAILS on the wrong size
+or slide count, fonts other than Sora/Inter, slides off the paper background (#EFEEEA),
+or website electric blue; it WARNS when no photo is used (Posts 1 and 2 have photo bands
+on the cover, a middle slide and the close). Every FAIL is fixed; every warning goes to
+Brad as a decision. Show Brad the side-by-side sheet with the draft, every time.
+
 ## Step 5: report (the SOP's output contract)
 
 Return, in this order:
