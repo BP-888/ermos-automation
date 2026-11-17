@@ -10,7 +10,8 @@
     "date": "2026-11-16",
     "url": "https://www.colesgroup.com.au/updates/",
     "verified_point": "Investigating a cyber security incident; working with the ACSC and global experts; no evidence customer, team or supplier data compromised; 'a time of increasing cyber incidents in Australia and around the world'",
-    "where": "Updates page, statement current as at 16 Nov 2026 8:30am"
+    "where": "Updates page, statement current as at 16 Nov 2026 8:30am",
+    "note": "Quoted unnamed in the post (Brad, 17 Nov 2026); source kept here as evidence"
    }
   ]
  },
@@ -34,7 +35,7 @@
   "approved": {
    "by": "Brad",
    "date": "2026-11-17",
-   "evidence": "Brad: 'B, comment 2, Thursday 3:42pm, text-only slides'"
+   "evidence": "Brad: 'Unnamed' (supermarket chain not named; no Coles link), on top of 'B, comment 2'"
   },
   "design_change": {
    "by": "Brad",
@@ -56,17 +57,32 @@
   {
    "slide": 1,
    "source": "123rf",
+   "id": "41122930",
+   "listing": "https://www.123rf.com/photo_41122930_blurred-image-of-shopping-in-supermarket-with-shopping-cart.html",
+   "type_label": "Stock Photo",
+   "ai_generated": false,
+   "editorial_only": false,
+   "licensed": {
+    "by": "Brad",
+    "date": "2026-11-17",
+    "evidence": "Brad picked it and uploaded the unwatermarked licensed file"
+   },
+   "file": "images/123rf-41122930.jpg"
+  },
+  {
+   "slide": 3,
+   "source": "123rf",
    "id": "250906483",
    "listing": "https://www.123rf.com/photo_250906483_serious-face-of-manager-focusing-on-mobile-phone-with-colleague-to-check-waiting-on-email-data-at.html",
    "type_label": "Stock Photo",
    "ai_generated": false,
+   "editorial_only": false,
    "licensed": {
     "by": "Brad",
     "date": "2026-11-17",
-    "evidence": "Brad: 'Done. Agreed, that's all three photos' (licensed on his 123RF account)"
+    "evidence": "Brad: 'Done. Agreed, that's all three photos'"
    },
-   "file": "images/123rf-250906483.jpg",
-   "editorial_only": false
+   "file": "images/123rf-250906483.jpg"
   },
   {
    "slide": 4,
@@ -100,5 +116,6 @@
    "editorial_only": false
   }
  ],
- "buffer_note": "Buffer draft 6afbdc3d4b26315855c05c4c (made before this gate existed)"
+ "buffer_note": "Buffer draft 6afbdc3d4b26315855c05c4c (made before this gate existed)",
+ "review_title": "Coles Post Review"
 }
