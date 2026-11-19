@@ -2,7 +2,7 @@
 
 Temporary. Delete each section once it is picked up; delete the file when none remain.
 
-# Collateral for Flyers (paused 16 Nov 2026; resume 17 Nov, 9:30am Sydney)
+# Collateral for Flyers (paused 16 Nov 2026; resume Fri 20 Nov, 11am Sydney)
 
 Session: "Collateral for Flyers". Presentations get their own later session, "Collateral for Presentations". Video is last and parked.
 
@@ -13,6 +13,10 @@ Session: "Collateral for Flyers". Presentations get their own later session, "Co
 - Facts and audience for outbound collateral: the selected ICP page first (proposed: the Claims Register still blocks unsupported product claims).
 - Order: LinkedIn (being built now) -> Facebook and Instagram organic posts -> video. No paid ads.
 - marketing-copy becomes the one copy step every channel calls; its rules live only there.
+
+## Since then
+- 16 Nov: board rule added to marketing-flyers s3: every flyer uses "Resident AI" at least once.
+- 17 Nov: resume deferred by Brad (busy day); nothing decided.
 
 ## Done
 - HQ Proposed Change: "B2B sounding board for marketing-copy review" (Hormozi lead; Dunford, Ehrenberg-Bass/B2B Institute, Wiebe, Walker): https://app.notion.com/p/41a77626a809819eb2adccc6daa690e2. Waiting on Brad.
